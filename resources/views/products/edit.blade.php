@@ -5,6 +5,11 @@
 <div class="col-6">
 <div class="head">
                 <h3>Prekės redagavimas</h3>
+                <form action="{{route('products.destroy', $product)}}" method="post">
+                    @csrf
+                    <button class="btn btn-danger">Ištrinti prekę</button>
+                </form>
+                
                 <a class="btn btn-primary" href="{{route('products.index')}}">Grįžti į prekių sąrašą</a>
         </div>
     <div class="form">
@@ -51,8 +56,7 @@
                 </tr>
                 <tr>
                     <th>Veiksmai</th>
-                    <td><button class="btn btn-primary" type="submit">Redaguoti prekę</button>
-                        <button class="btn btn-danger">Ištrinti prekę</button>
+                    <td><button class="btn btn-primary" type="submit">Išsaugoti pakeitimus</button>
                     </td>
                 </tr>
                 

@@ -6,22 +6,33 @@
         <h2>Pardavimai</h2>
         <a class="btn btn-primary" href="{{route('orders.create')}}">Sukurti naują pardavimą</a>
     </div>
+    <hr>
     <!-- Paspaudus sukurti pardavima turi atsirasti forma .form -->
     <div class="row">
         <div class="col-4">
+            turi nesimatyti iki paspaudi sukurti nauja pardavima
+            <h3>Naujas pardavimas</h3>
         <form class="form" action="{{route('orders.store')}}" method="post">
             @csrf
+            <div class="form-group">
+            <label for="">Pasirinkite klientą</label>
                 <select name="client_id" id="client_id">
-                        <option value="">Pasirintite klientą</option>
+                        
                             @foreach($clients as $client)
                         <option value="{{$client -> id}}">{{$client -> klientas}},{{$client -> miestas}} </option>
                             @endforeach
                 </select>
+            </div>
+            <div class="form-group">
+            <label for="">Pristatymo būdas</label>
                 <select name="pristatymo_budas" id="pristatymo_budas">
                     <option value="Atsiėmė vietoje">Atsiėmė vietoje</option>
                     <option value="Išsiųsti">Išsiųsti</option>
                     <option value="Nuvežti">Nuvežti</option>
                 </select>
+            </div>
+                
+                
                 <button class="btn btn-primary" type="submit">Sukurti pardavima</button>
         </form>
         </div>

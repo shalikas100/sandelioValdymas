@@ -38,16 +38,15 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
+                    @auth
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item"><a class="nav-link" href="{{route('products.index')}}">Prekės</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('products.index')}}">Prekės</a></li>   
                         <li class="nav-item"><a class="nav-link" href="{{route('clients.index')}}">Klientai</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{route('orders.index')}}">Pardavimai</a></li>
                         <li class="nav-item"><a class="nav-link" href="">Pajamavimai</a></li>
                         <li class="nav-item"><a class="nav-link" href="">Inventorizavimai</a></li>
-
-
                     </ul>
-
+                    @endauth
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->

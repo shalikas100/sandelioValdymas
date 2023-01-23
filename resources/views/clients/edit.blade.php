@@ -45,7 +45,7 @@
                         </tr>
                         <tr>
                             <th>Veiksmai</th>
-                            <td><button class="btn btn-primary" type="submit">Redaguoti klientą</button>
+                            <td><button class="btn btn-primary" type="submit">Išsaugoti pakeitimus</button>
                             </td>
                         </tr>
                     </table>

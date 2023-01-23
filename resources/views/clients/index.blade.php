@@ -25,6 +25,7 @@
         <h2>Klientai</h2>
         <a class="btn btn-primary" href="{{route('clients.create')}}">Sukurti naują klientą</a>
     </div>
+    <hr>
     <div class="row">
         <div class="col-4">
             <form id="searchAjax" url-clients-ajax-action="{{route('clients.searchAjax')}}">

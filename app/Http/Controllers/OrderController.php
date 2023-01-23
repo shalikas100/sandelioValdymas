@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Order;
 use App\OrderDetail;
 use App\Client;
+use App\Product;
+
 use Illuminate\Http\Request;
 
 
@@ -35,9 +37,6 @@ class OrderController extends Controller
         return view('orders.index', ['orders' => $orders, 'clients' => $clients]);
     }
 
-
-
-
     public function createProducts()
     {
         $orderDetails = OrderDetail::all();
@@ -48,14 +47,29 @@ class OrderController extends Controller
 
     public function storeProducts(Request $request)
     {
+
+        $request->validate([
+            'product_id' => 'required|integer',
+            'kiekis' => 'required|integer|gt:0',
+        ]);
+
         $orderDetail = new OrderDetail;
 
         $orderDetail -> details_id= $request -> details_id;
         $orderDetail -> product_id= $request -> product_id;
         $orderDetail -> kiekis= $request -> kiekis;
 
+        if($orderDetail -> kiekis > $orderDetail -> orderDetailProducts -> likutis){
+            return back()
+            ->with('danger_message', 
+            'Prekės, kodu: "'.$orderDetail -> orderDetailProducts -> kodas.'" 
+            kiekis nepakankamas. Likutis sandėlyje "'.$orderDetail -> orderDetailProducts -> likutis.'".');
+        }
+
         $orderDetail->save();
 
+        Product::find($request -> product_id) -> decrement('likutis', $request->kiekis);
+        
         return back();
 
     }
@@ -87,8 +101,8 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        
-        return view('orders.show', ['order' => $order]);
+        $allProducts = Product::all();
+        return view('orders.show', ['order' => $order, 'allProducts' => $allProducts]);
     }
 
     /**
@@ -122,6 +136,6 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+    
     }
 }

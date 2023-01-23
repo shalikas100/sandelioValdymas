@@ -52,11 +52,6 @@ class ClientController extends Controller
         return redirect()->route('clients.index')->with('success_message', 'Klientas "'.$client -> klientas.'" sukurtas sėkmingai.');
     }
 
-    public function storeAjax(){
-
-        
-    }
-
     /**
      * Display the specified resource.
      *
@@ -114,7 +109,8 @@ class ClientController extends Controller
         return redirect()->route('clients.index')->with('danger_message', 'Klientas "'.$client ->klientas.'" ištrintas.');
     }
 
-    public function searchAjax(){
+    public function searchAjax()
+    {
 
         $search = request() -> query('search');
 

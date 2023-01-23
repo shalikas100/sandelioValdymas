@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\OrderDetail;
+use App\Order;
+use App\Product;
 use Illuminate\Http\Request;
 
 class OrderDetailController extends Controller
@@ -14,7 +16,9 @@ class OrderDetailController extends Controller
      */
     public function index()
     {
-        //
+        $orderDetails = OrderDetail::all();
+
+        return view('orderDetails.index', ['orderDetails' => $orderDetails]);
     }
 
     /**
@@ -83,6 +87,9 @@ class OrderDetailController extends Controller
      */
     public function destroy(OrderDetail $orderDetail)
     {
-        //
+
+        $orderDetail -> DB::table('order_details')->where('details_id', $orderDetail -> detaisl_id)->delete();
+        return view('orderDetails.index');
+        
     }
 }

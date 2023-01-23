@@ -10,7 +10,7 @@ class OrderDetail extends Model
 {
     public function orderDetailOrder()
     {
-        return $this->hasMany(Order::class, 'details_id', 'id');
+        return $this->belongsTo(Order::class, 'details_id', 'id');
     }
 
     public function orderDetailProducts()

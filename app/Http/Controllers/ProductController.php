@@ -109,10 +109,13 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product -> delete();
+        
+        return redirect()->route('products.index')->with('danger_message', 'Prekė kodu:"'.$product ->kodas.'" ištrinta.');
     }
 
-    public function searchAjax(){
+    public function searchAjax()
+    {
 
         $search = request() -> query('search');
 

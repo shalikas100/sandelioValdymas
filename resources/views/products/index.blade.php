@@ -7,10 +7,18 @@
                     {{ session('success_message')}}
                 </div>
             @endif
+
+            @if(session('danger_message'))
+                <div class="alert alert-danger">
+                    {{ session('danger_message')}}
+                </div>
+            @endif
+            
     <div class="head">
         <h2>Prekės</h2>
         <a class="btn btn-primary" href="{{route('products.create')}}">Sukurti naują prekę</a>
     </div>
+    <hr>
     <div class="row">
         <div class="col-4">
             <form id="searchAjax" url-products-ajax-action="{{route('products.searchAjax')}}">
