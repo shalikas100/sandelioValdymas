@@ -37,6 +37,17 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'im_kodas' => 'required',
+            'klientas' => 'required',
+            'adresas' => 'required',
+            'miestas' => 'required',
+            'pasto_kodas' => 'required',
+            'telefonas' => 'required',
+            'el_pastas' => 'required',
+        ]);
+
+
         $client = new Client();
 
         $client -> im_kodas = $request -> im_kodas;

@@ -24,16 +24,16 @@
                 </select>
             </div>
             <div class="form-group">
-            <label for="">Pristatymo būdas</label>
+            <label for="">Pristatymo būdai</label>
                 <select name="pristatymo_budas" id="pristatymo_budas">
-                    <option value="Atsiėmė vietoje">Atsiėmė vietoje</option>
+                    <option value="Atsiėmė vietoje">Atsiims vietoje</option>
                     <option value="Išsiųsti">Išsiųsti</option>
-                    <option value="Nuvežti">Nuvežti</option>
+                    <option value="Nuvežti">Pristatyti</option>
                 </select>
             </div>
                 
                 
-                <button class="btn btn-primary" type="submit">Sukurti pardavima</button>
+                <button class="btn btn-primary" type="submit">Sukurti pardavimą</button>
         </form>
         </div>
     </div>
@@ -53,7 +53,7 @@
                     <td>{{$order -> orderClients -> klientas}}</td>
                     <td>{{$order -> created_at -> format('Y-m-d')}}</td>
                     <td>{{$order -> pristatymo_budas}}</td>
-                    <td><a class="btn btn-primary" href="{{route('orders.show', $order)}}">Pildyti uzsakyma</a></td>
+                    <td><a class="btn btn-primary" href="{{route('orders.show', $order)}}">Pildyti užsakymą</a></td>
                 </tr>
                 @endforeach
                 

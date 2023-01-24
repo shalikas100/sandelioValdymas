@@ -87,9 +87,11 @@ class OrderDetailController extends Controller
      */
     public function destroy(OrderDetail $orderDetail)
     {
+        $orderDetail -> delete();
 
-        $orderDetail -> DB::table('order_details')->where('details_id', $orderDetail -> detaisl_id)->delete();
-        return view('orderDetails.index');
-        
+        Product::find($orderDetail -> product_id) -> increment('likutis', $orderDetail -> kiekis);
+
+
+        return redirect()->back();
     }
 }

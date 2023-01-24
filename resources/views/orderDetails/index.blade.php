@@ -24,7 +24,7 @@
     <td>
         <form action="{{route('orderDetails.destroy', $orderDetail)}}" method="post">
             @csrf
-            <button type="submit">Trinti {{$orderDetail -> details_id}}</button>
+            <button type="submit">Trinti</button>
         </form>
     </td>
 </tr>

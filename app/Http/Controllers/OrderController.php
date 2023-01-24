@@ -55,17 +55,17 @@ class OrderController extends Controller
 
         $orderDetail = new OrderDetail;
 
-        $orderDetail -> details_id= $request -> details_id;
-        $orderDetail -> product_id= $request -> product_id;
+        $orderDetail -> details_id = $request -> details_id;
+        $orderDetail -> product_id = $request -> product_id;
         $orderDetail -> kiekis= $request -> kiekis;
-
+        
         if($orderDetail -> kiekis > $orderDetail -> orderDetailProducts -> likutis){
             return back()
             ->with('danger_message', 
             'Prekės, kodu: "'.$orderDetail -> orderDetailProducts -> kodas.'" 
             kiekis nepakankamas. Likutis sandėlyje "'.$orderDetail -> orderDetailProducts -> likutis.'".');
         }
-
+        
         $orderDetail->save();
 
         Product::find($request -> product_id) -> decrement('likutis', $request->kiekis);
@@ -136,6 +136,7 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
+
     
     }
 }

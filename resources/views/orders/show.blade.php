@@ -19,11 +19,11 @@
                 <h3>Užsakymo duomenys</h3>
                     <table class="table">
                         <tr>
-                            <th>Užsakymo nr.:</th>
+                            <th>Užsakymo nr.</th>
                             <td>{{10000 + $order -> id}}</td>
                         </tr>
                         <tr>
-                            <th>Užsakymo data:</th>
+                            <th>Užsakymo data</th>
                             <td>{{$order -> created_at -> format('Y-m-d')}}</td>
                         </tr>
                         <tr>
@@ -32,34 +32,34 @@
                         </tr>
                     </table>
                     <hr>
-                    <h3>Kliento duomenys:</h3>
+                    <h3>Kliento duomenys</h3>
                     <table class="table">
                         <tr>
-                            <th>Įmonės kodas:</th>
+                            <th>Įmonės kodas</th>
                             <td>{{$order -> orderClients -> im_kodas}}</td>
                         </tr>
                         <tr>
-                            <th>Klientas:</th>
+                            <th>Klientas</th>
                             <td>{{$order -> orderClients -> klientas}}</td>
                         </tr>
                         <tr>
-                            <th>Adresas:</th>
+                            <th>Adresas</th>
                             <td>{{$order -> orderClients -> adresas}}</td>
                         </tr>
                         <tr>
-                            <th>Miestas:</th>
+                            <th>Miestas</th>
                             <td>{{$order -> orderClients -> miestas}}</td>
                         </tr>
                         <tr>
-                            <th>Pašto kodas:</th>
+                            <th>Pašto kodas</th>
                             <td>{{$order -> orderClients -> pasto_kodas}}</td>
                         </tr>
                         <tr>
-                            <th>Telefonas:</th>
+                            <th>Telefonas</th>
                             <td>{{$order -> orderClients -> telefonas}}</td>
                         </tr>
                         <tr>
-                            <th>El. paštas:</th>
+                            <th>El. paštas</th>
                             <td>{{$order -> orderClients -> el_pastas}}</td>
                         </tr>
                     </table>
@@ -76,7 +76,7 @@
                     <input type="hidden" name="details_id" placeholder="details_id" value="{{$order -> id}}">
 
                     <select name="product_id" id="product_id" class="form-control @error('product_id') is-invalid @enderror">
-                        <option value="preke">Pasirinkite preke</option>
+                        <option value="preke">Pasirinkite prekę</option>
                         @foreach($allProducts as $product)
                         <option value="{{$product -> id}}">{{$product -> kodas}}, Likutis {{$product -> likutis}}</option>
                         @endforeach
@@ -111,12 +111,12 @@
                 </tr>
                 @foreach($order -> orderOrderDetails as $orderDetail)
                 <tr>
-                    <td>{{$orderDetail -> details_id}}</td>
-                    <td>{{$orderDetail -> orderDetailProducts -> kodas}}</td>
+                    <td>{{$loop -> iteration}}</td>
+                    <td> {{$orderDetail -> orderDetailProducts -> kodas}}</td>
                     <td>{{$orderDetail -> orderDetailProducts -> pavadinimas}}</td>
                     <td>{{$orderDetail -> kiekis}}</td>
                     <td>{{$orderDetail -> kiekis * $orderDetail -> orderDetailProducts -> svoris}} kg</td>  
-                    <td>Vieta sandėlyje</td>
+                    <td>{{$orderDetail -> orderDetailProducts -> vieta_sandelyje}}</td>
                     <td>
                         <form action="{{route('orderDetails.destroy', $orderDetail)}}" method="post">
                             @csrf
