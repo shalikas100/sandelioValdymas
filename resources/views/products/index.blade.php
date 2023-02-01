@@ -16,7 +16,7 @@
             
     <div class="head">
         <h2>Prekės</h2>
-        <a class="btn btn-primary" href="{{route('products.create')}}">Sukurti naują prekę</a>
+        <!-- <a class="btn btn-primary" href="{{route('products.create')}}">Sukurti naują prekę</a> -->
     </div>
     <hr>
     <div class="row">
@@ -27,9 +27,10 @@
         </div>
     </div>
     <div class="table">
-        <table class="table table-striped">
+        <table class="table table-hover">
             <thead>
             <tr>
+                <th>Eil. Nr.</th>
                 <th>Kodas</th>
                 <th>Barkodas</th>
                 <th>Pavadinimas</th>
@@ -45,13 +46,16 @@
             <tbody class="products">
             @foreach($products as $product)
             <tr>
+                <td>{{$loop -> iteration}}</td>
                 <td>{{$product -> kodas}}</td>
                 <td>{{$product -> barkodas}}</td>
                 <td>{{$product -> pavadinimas}}</td>
                 <td>{{$product -> likutis}}</td>
                 <td>{{$product -> svoris}}</td>
                 <td>{{$product -> vnt_dezeje}}</td>
+
                 <td>{{$product -> gamintojas}}</td>
+                
                 <td>{{$product -> tipas}}</td>
                 <td>{{$product -> vieta_sandelyje}}</td>
                 <td><a class="btn btn-primary" href="{{route('products.show', $product)}}">Rodyti</a></td>

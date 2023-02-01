@@ -16,9 +16,9 @@ class CreateOrderDetailsTable extends Migration
         Schema::create('order_details', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('details_id');
-            $table->foreign('details_id')->references('id')->on('orders')->onDelete('cascade');
+            $table->foreign('details_id')->references('id')->on('orders');
             $table->unsignedBigInteger('product_id')->index();
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products');
             $table->integer('kiekis');
             $table->timestamps();
         });

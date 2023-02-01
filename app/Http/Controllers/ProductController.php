@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use App\Manufacturer;
 
 class ProductController extends Controller
 {
@@ -26,7 +27,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+
+        $manufacturers = Manufacturer::all();
+
+        return view('products.create', ['manufacturers' => $manufacturers]);
     }
 
     /**
@@ -37,12 +41,24 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'kodas' => 'required|min:2|max:20|alpha_dash',
+            'barkodas' => 'required|integer|digits_between:3,20',
+            'pavadinimas' => 'required|min:2|max:64',
+            // 'likutis' => 'required|numeric|gte:0',
+            'svoris' => 'required|numeric|between:0,1000.00',
+            'vnt_dezeje' => 'required|integer|digits_between:1,10000',
+            'gamintojas' => 'required|min:2|max:64',
+            'tipas' => 'required|min:2|max:20',
+            'vieta_sandelyje' => 'required|min:0|max:12|alpha_dash',
+        ]);
+
         $product = new Product();
 
         $product -> kodas = $request -> kodas;
         $product -> barkodas = $request -> barkodas;
         $product -> pavadinimas = $request -> pavadinimas;
-        $product -> likutis = $request -> likutis;
+        $product -> likutis = $request -> likutis = 0;
         $product -> svoris = $request -> svoris;
         $product -> vnt_dezeje = $request -> vnt_dezeje;
         $product -> gamintojas = $request -> gamintojas;
@@ -51,7 +67,7 @@ class ProductController extends Controller
 
         $product->save();
 
-        return redirect()->route('products.index')->with('success_message', 'Prekė, kodu "'.$product -> kodas.'" sukurta sėkmingai');
+        return redirect()->route('products.index')->with('success_message', 'Prekė kodu "'.$product -> kodas.'" sukurta sėkmingai');
 
     }
 
@@ -86,6 +102,18 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+        $request->validate([
+            'kodas' => 'required|min:2|max:20|alpha_dash',
+            'barkodas' => 'required|integer|digits_between:3,20',
+            'pavadinimas' => 'required|min:2|max:64',
+            'likutis' => 'required|integer|gt:0',
+            'svoris' => 'required|numeric|between:0,1000.00',
+            'vnt_dezeje' => 'required|integer|digits_between:1,10000',
+            'gamintojas' => 'required|min:2|max:20',
+            'tipas' => 'required|min:2|max:20',
+            'vieta_sandelyje' => 'required|min:2|max:12|alpha_dash',
+        ]);
+
         $product -> kodas = $request -> kodas;
         $product -> barkodas = $request -> barkodas;
         $product -> pavadinimas = $request -> pavadinimas;
@@ -98,7 +126,7 @@ class ProductController extends Controller
 
         $product->save();
 
-        return redirect()->route('products.index')->with('success_message', 'Prekė, kodu "'.$product -> kodas.'" atnaujinta sėkmingai');
+        return redirect()->route('products.index')->with('success_message', 'Prekė kodu "'.$product -> kodas.'" atnaujinta sėkmingai');
     }
 
     /**
@@ -111,7 +139,7 @@ class ProductController extends Controller
     {
         $product -> delete();
         
-        return redirect()->route('products.index')->with('danger_message', 'Prekė kodu:"'.$product ->kodas.'" ištrinta.');
+        return redirect()->route('products.index')->with('success_message', 'Prekė kodu "'.$product ->kodas.'" ištrinta');
     }
 
     public function searchAjax()

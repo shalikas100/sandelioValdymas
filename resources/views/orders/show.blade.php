@@ -69,35 +69,36 @@
         <!-- uzsakym lentele -->
         <div class="table col-8">
             <!-- prekiu forma -->
-            <div class="form">  
+            <div class="col-6 form">  
                 <h3>Prekės įvedimas</h5>     
                 <form action="{{route('orders.storeProducts')}}" method="post">
                 @csrf
                     <input type="hidden" name="details_id" placeholder="details_id" value="{{$order -> id}}">
 
-                    <select name="product_id" id="product_id" class="form-control @error('product_id') is-invalid @enderror">
-                        <option value="preke">Pasirinkite prekę</option>
+                    <select name="product_id" id="product_id" class="form-control mb-2 @error('product_id') is-invalid @enderror">
+                        <option value="" disabled selected>Pasitinkite prekę</option>
                         @foreach($allProducts as $product)
                         <option value="{{$product -> id}}">{{$product -> kodas}}, Likutis {{$product -> likutis}}</option>
                         @endforeach
                     </select>
-                    @error('product_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                    @enderror
+                        @error('product_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                        @enderror
 
-                    <input type="text" name="kiekis" placeholder="Kiekis" class="form-control @error('kiekis') is-invalid @enderror">
-                    @error('kiekis')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                     @enderror
+                    <input type="text" name="kiekis" placeholder="Kiekis" class="form-control mb-2 @error('kiekis') is-invalid @enderror">
+                        @error('kiekis')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                        @enderror
 
                     <button class="btn-xs btn-primary" type="submit">Įtraukti</button>
                 </form>
-                <hr>
+                
             </div>
+            <hr>
             <div class="table">
             <table class="table table-striped">
                 <tr>

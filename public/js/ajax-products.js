@@ -18,6 +18,7 @@ $(document).ready(function(){
 
                 for(var i = 0; i < response.length; i++){
                     generateHtml += '<tr>';
+                    generateHtml += '<td>'+(i+1)+'</td>';
                     generateHtml += '<td>'+response[i].kodas+'</td>';
                     generateHtml += '<td>'+response[i].barkodas+'</td>';
                     generateHtml += '<td>'+response[i].pavadinimas+'</td>';

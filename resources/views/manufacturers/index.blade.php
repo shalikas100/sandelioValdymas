@@ -22,15 +22,15 @@
             @endif
 
     <div class="head">
-        <h2>Klientai</h2>
-        <a class="btn btn-primary" href="{{route('clients.create')}}">Sukurti naują klientą</a>
+        <h2>Gamintojai</h2>
+        <a class="btn btn-primary" href="{{route('manufacturers.create')}}">Sukurti naują gamintoją</a>
     </div>
     <hr>
     <div class="row">
         <div class="col-4">
-            <form id="searchAjax" url-clients-ajax-action="{{route('clients.searchAjax')}}">
+            <form id="searchAjax" url-manufacturers-ajax-action="{{route('manufacturers.searchAjax')}}">
                 @csrf
-                <input id="search" type="text" name="search" placeholder="Kliento paieška">
+                <input id="search" type="text" name="search" placeholder="Gamintojo paieška">
             </form>
         </div>
     </div>
@@ -39,28 +39,18 @@
             <thead>
                 <tr>
                     <th>Eil. Nr.</th>
-                    <th>Kliento įm. kodas</th>
-                    <th>Klientas</th>
-                    <th>Adresas</th>
-                    <th>Miestas</th>
-                    <th>Pašto kodas</th>
-                    <th>Telefono nr.</th>
-                    <th>Elektroninis paštas</th>
+                    <th>Gamintojas</th>
+                    <th>Kiek kartu pajamuota</th>
                     <th>Veiksmai</th>
                 </tr>
             </thead>
-            <tbody class="clients">
-            @foreach($clients as $client)
+            <tbody class="manufacturers">
+            @foreach($manufacturers as $manufacturer)
                 <tr>
                     <td>{{$loop -> iteration}}</td>
-                    <td>{{$client -> im_kodas}}</td>
-                    <td>{{$client -> klientas}}</td>
-                    <td>{{$client -> adresas}}</td>
-                    <td>{{$client -> miestas}}</td>
-                    <td>{{$client -> pasto_kodas}}</td>
-                    <td>{{$client -> telefonas}}</td>
-                    <td>{{$client -> el_pastas}}</td>
-                    <td><a class="btn btn-primary" href="{{route('clients.show', $client)}}">Rodyti</a></td>
+                    <td>{{$manufacturer -> manufacturer}}</td>
+                    <td><a class="btn btn-light" href="{{route('invoices.index')}}">{{$manufacturer -> manufacturerInvoice -> count()}}</a></td>
+                    <td><a class="btn btn-primary" href="{{route('manufacturers.show', $manufacturer)}}">Rodyti</a></td>
                 </tr>
             @endforeach
             </tbody>

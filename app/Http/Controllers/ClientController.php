@@ -38,13 +38,13 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'im_kodas' => 'required',
-            'klientas' => 'required',
-            'adresas' => 'required',
-            'miestas' => 'required',
-            'pasto_kodas' => 'required',
-            'telefonas' => 'required',
-            'el_pastas' => 'required',
+            'im_kodas' => 'required|min:4|max:20',
+            'klientas' => 'required|min:3|max:64',
+            'adresas' => 'required|min:6|max:64',
+            'miestas' => 'required|min:2|max:64',
+            'pasto_kodas' => 'required|integer|digits_between:5,5',
+            'telefonas' => 'required|integer|digits_between:11,11',
+            'el_pastas' => 'required|email',
         ]);
 
 
@@ -60,7 +60,7 @@ class ClientController extends Controller
 
         $client->save();
 
-        return redirect()->route('clients.index')->with('success_message', 'Klientas "'.$client -> klientas.'" sukurtas sėkmingai.');
+        return redirect()->route('clients.index')->with('success_message', 'Klientas "'.$client -> klientas.'" sukurtas sėkmingai');
     }
 
     /**
@@ -94,6 +94,16 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
+        $request->validate([
+            'im_kodas' => 'required|min:4|max:20',
+            'klientas' => 'required|min:3|max:64',
+            'adresas' => 'required|min:6|max:64',
+            'miestas' => 'required|min:2|max:64',
+            'pasto_kodas' => 'required|integer|digits_between:5,5',
+            'telefonas' => 'required|integer|digits_between:11,11',
+            'el_pastas' => 'required|email',
+        ]);
+
         $client -> im_kodas = $request -> im_kodas;
         $client -> klientas = $request -> klientas;
         $client -> adresas = $request -> adresas;
@@ -104,7 +114,7 @@ class ClientController extends Controller
 
         $client->save();
 
-        return redirect()->route('clients.index')->with('success_message', 'Klientas "'.$client -> klientas.'" atnaujintas sėkmingai.');
+        return redirect()->route('clients.index')->with('success_message', 'Klientas "'.$client -> klientas.'" atnaujintas sėkmingai');
     }
 
     /**
@@ -115,9 +125,17 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
+
+
+        $clientOrders_count = $client -> clientOrders -> count();
+
+        if ($clientOrders_count>0) {
+            return redirect()->route('clients.index')->with('danger_message', 'Negalima ištrinti kliento "'.$client -> klientas.'", nes jis turi pardavimų');
+        }
+
         $client -> delete();
         
-        return redirect()->route('clients.index')->with('danger_message', 'Klientas "'.$client ->klientas.'" ištrintas.');
+        return redirect()->route('clients.index')->with('success_message', 'Klientas "'.$client ->klientas.'" ištrintas');
     }
 
     public function searchAjax()

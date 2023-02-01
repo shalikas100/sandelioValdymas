@@ -15,39 +15,104 @@
             <table class="table">
                 <tr>
                     <th>Kodas</th>
-                    <td><input type="text" name="kodas"></td>
+                    <td><input type="text" name="kodas" class="form-control @error('kodas') is-invalid @enderror" value="{{old('kodas')}}" placeholder="Kodas">
+                                    @error('kodas')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                    </td>
                 </tr>
                 <tr>
                     <th>Barkodas</th>
-                    <td><input type="text" name="barkodas"></td>
+                    <td><input type="text" name="barkodas" class="form-control @error('barkodas') is-invalid @enderror" value="{{old('barkodas')}}" placeholder="Barkodas">
+                                    @error('barkodas')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                    </td>
                 </tr>
                 <tr>
                     <th>Pavadinimas</th>
-                    <td><input type="text" name="pavadinimas"></td>
+                    <td><input type="text" name="pavadinimas" class="form-control @error('pavadinimas') is-invalid @enderror" value="{{old('pavadinimas')}}" placeholder="Pavadinimas">
+                                    @error('pavadinimas')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                    </td>
                 </tr>
-                <tr>
-                    <th>Likutis</th>
-                    <td><input type="text" name="likutis"></td>
-                </tr>
+               <input  type="hidden" name="likutis" class="form-control @error('likutis') is-invalid @enderror" value="{{old('likutis')}}" placeholder="Likutis">
+                                    @error('likutis')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                    
                 <tr>
                     <th>Vnt. svoris (kg) </th>
-                    <td><input type="text" name="svoris"></td>
+                    <td><input type="text" name="svoris" class="form-control @error('svoris') is-invalid @enderror" value="{{old('svoris')}}" placeholder="Vnt. svoris (kg)">
+                                    @error('svoris')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                    </td>
                 </tr>
                 <tr>
                     <th>Vnt. dėžėje</th>
-                    <td><input type="text" name="vnt_dezeje"></td>
+                    <td><input type="text" name="vnt_dezeje" class="form-control @error('vnt_dezeje') is-invalid @enderror" value="{{old('vnt_dezeje')}}" placeholder="Vnt. dėžėje">
+                                    @error('vnt_dezeje')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                    </td>
                 </tr>
                 <tr>
                     <th>Gamintojas</th>
-                    <td><input type="text" name="gamintojas"></td>
+                    <td>
+                    
+                        <select name="gamintojas" id="gamintojas" class="form-control @error('gamintojas') is-invalid @enderror" value="{{old('gamintojas')}}" placeholder="Vnt. dėžėje">
+                            <option value="" disabled selected>Pasirinkite gamintoją</option>
+                            @foreach($manufacturers as $manufacturer)
+                                <option value="{{$manufacturer -> manufacturer}}"> {{$manufacturer -> manufacturer}}</option>
+                            @endforeach
+                        </select>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <!-- <input type="text" name="gamintojas" class="form-control @error('gamintojas') is-invalid @enderror" value="{{old('gamintojas')}}" placeholder="Gamintojas"> -->
+                                    @error('gamintojas')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                    </td>
                 </tr>
                 <tr>
                     <th>Tipas</th>
-                    <td><input type="text" name="tipas"></td>
+                    <td><input type="text" name="tipas" class="form-control @error('tipas') is-invalid @enderror" value="{{old('tipas')}}" placeholder="Tipas">
+                                    @error('tipas')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                    </td>
                 </tr>
                 <tr>
                     <th>Vieta sandėlyje</th>
-                    <td><input type="text" name="vieta_sandelyje"></td>
+                    <td><input type="text" name="vieta_sandelyje" class="form-control @error('vieta_sandelyje') is-invalid @enderror" value="{{old('vieta_sandelyje')}}" placeholder="Vieta sandėlyje">
+                                    @error('vieta_sandelyje')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                    </td>
                 </tr>
                 <tr>
                     <th>Veiksmai</th>
@@ -57,7 +122,8 @@
             </table>
     </form>
     </div>
-</div>         
+</div>  
+                      
 </div>
 
 @endsection

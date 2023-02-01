@@ -5,7 +5,7 @@
 <div class="container">
     <div class="col-5">
         <div class="head">
-            <h3>Prekė: {{$product -> pavadinimas}}, {{$product -> kodas}}</h3>
+            <h3>Informacija</h3>
             <a class="btn btn-primary" href="{{route('products.index')}}">Grįžti į prekių sąrašą</a>
         </div>
         

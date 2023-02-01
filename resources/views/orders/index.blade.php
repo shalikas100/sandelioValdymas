@@ -9,54 +9,89 @@
     <hr>
     <!-- Paspaudus sukurti pardavima turi atsirasti forma .form -->
     <div class="row">
-        <div class="col-4">
-            turi nesimatyti iki paspaudi sukurti nauja pardavima
-            <h3>Naujas pardavimas</h3>
+        <div class="col-6">
+            <h3>Pardavimo kūrimas</h3>
+                    @if(session('success_message'))
+                        <div class="alert alert-success">
+                            {{ session('success_message')}}
+                        </div>
+                    @endif
+                    @if(session('danger_message'))
+                        <div class="alert alert-danger">
+                            {{ session('danger_message')}}
+                        </div>
+                    @endif
         <form class="form" action="{{route('orders.store')}}" method="post">
             @csrf
             <div class="form-group">
-            <label for="">Pasirinkite klientą</label>
-                <select name="client_id" id="client_id">
-                        
-                            @foreach($clients as $client)
-                        <option value="{{$client -> id}}">{{$client -> klientas}},{{$client -> miestas}} </option>
-                            @endforeach
-                </select>
-            </div>
-            <div class="form-group">
-            <label for="">Pristatymo būdai</label>
-                <select name="pristatymo_budas" id="pristatymo_budas">
-                    <option value="Atsiėmė vietoje">Atsiims vietoje</option>
-                    <option value="Išsiųsti">Išsiųsti</option>
-                    <option value="Nuvežti">Pristatyti</option>
-                </select>
-            </div>
-                
-                
-                <button class="btn btn-primary" type="submit">Sukurti pardavimą</button>
+                <table class="table">
+                    <tr>
+                        <th>Pasirinkite klientą</th>
+                        <td><select name="client_id" id="client_id" class="form-control @error('client_id') is-invalid @enderror"> 
+                            <option value="" disabled selected>Pasirinkite klientą</option>   
+                                @foreach($clients as $client)
+                            <option value="{{$client -> id}}">{{$client -> klientas}}, {{$client -> miestas}} </option>
+                                @endforeach
+                            </select>
+                                    @error('client_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror</td>
+                    </tr>
+                    <tr>
+                        <th>Pristatymo būdai</th>
+                        <td>
+                            <select name="pristatymo_budas" id="pristatymo_budas" class="form-control @error('pristatymo_budas') is-invalid @enderror">
+                                <option value="" disabled selected>Pasirinkite pristatymo būdą</option>
+                                <option value="Atsiims vietoje">Atsiims vietoje</option>
+                                <option value="Išsiųsti">Išsiųsti</option>
+                                <option value="Pristatyti">Pristatyti</option>
+                            </select>
+                                    @error('pristatymo_budas')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Veiksmai</th>
+                        <td>
+                        <button class="btn btn-primary" type="submit">Sukurti pardavimą</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>     
         </form>
         </div>
     </div>
+
     <div class="row">
         <div class="col-8">
-            <table class="table table-stripe">
+            <table class="table table-hover">
+                <thead>
                 <tr>
-                    <th>Sąskaitos nr.</th>
+                    <th>Pardavimo nr.</th>
                     <th>Klientas</th>
                     <th>Sukūrimo data</th>
                     <th>Pristatymo būdas</th>
                     <th>Veiksmai</th>
+                    <th></th>
                 </tr>
+                </thead>
+                <tbody></tbody>
                 @foreach($orders as $order)
                 <tr>
                     <td>{{10000 + $order -> id}}</td>
                     <td>{{$order -> orderClients -> klientas}}</td>
                     <td>{{$order -> created_at -> format('Y-m-d')}}</td>
                     <td>{{$order -> pristatymo_budas}}</td>
-                    <td><a class="btn btn-primary" href="{{route('orders.show', $order)}}">Pildyti užsakymą</a></td>
+                    <td><a class="btn btn-primary" href="{{route('orders.show', $order)}}">Pildyti</a></td>
+                    <td><a class="btn btn-secondary"  href="{{route('orders.edit', $order)}}">Keisti</a></td>
                 </tr>
                 @endforeach
-                
+                </tbody>
             </table>
         </div>
     </div>

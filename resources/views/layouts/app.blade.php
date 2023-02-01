@@ -40,10 +40,11 @@
                     <!-- Left Side Of Navbar -->
                     @auth
                     <ul class="navbar-nav mr-auto">
+                        <li class="nav-item"><a class="nav-link" href="{{route('manufacturers.index')}}">Gamintojai</a></li>   
                         <li class="nav-item"><a class="nav-link" href="{{route('products.index')}}">Prekės</a></li>   
                         <li class="nav-item"><a class="nav-link" href="{{route('clients.index')}}">Klientai</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{route('orders.index')}}">Pardavimai</a></li>
-                        <li class="nav-item"><a class="nav-link" href="">Pajamavimai</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('invoices.index')}}">Pajamavimai</a></li>
                         <li class="nav-item"><a class="nav-link" href="">Inventorizavimai</a></li>
                     </ul>
                     @endauth
@@ -93,7 +94,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{asset('js/ajax-clients.js')}}"></script>
+    <script src="{{asset('js/ajax-manufacturers.js')}}"></script>
     <script src="{{asset('js/ajax-products.js')}}"></script>
+    <script src="{{asset('js/ajax-invoices.js')}}"></script>
     <script src="{{asset('js/orderClientSelect.js')}}"></script>
 
 

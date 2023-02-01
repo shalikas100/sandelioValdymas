@@ -83,6 +83,11 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'client_id' => 'required|integer',
+            'pristatymo_budas' => 'required',
+        ]);
+
         $order = new Order();
 
         $order -> client_id = $request -> client_id;
@@ -90,7 +95,7 @@ class OrderController extends Controller
 
         $order -> save();
 
-        return redirect()->route('orders.index');
+        return redirect()->route('orders.index')->with('success_message', 'Naujo pardavimo Nr. '.$order -> id.'. Pildyti');
     }
 
     /**
@@ -113,7 +118,8 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        $clients = Client::all();
+        return view('orders.edit', ['order' => $order, 'clients' => $clients]);
     }
 
     /**
@@ -125,7 +131,18 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        $request->validate([
+            'client_id' => 'required|integer',
+            'pristatymo_budas' => 'required',
+        ]);
+        
+        
+        $order -> client_id = $request -> client_id;
+        $order -> pristatymo_budas = $request -> pristatymo_budas;
+
+        $order -> save();
+
+        return redirect()->route('orders.index')->with('success_message', 'Pardavimo Nr. '.$order -> id.' duomenys pakeisti');
     }
 
     /**
@@ -137,6 +154,21 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
 
+        $orderDetail_count=$order->orderOrderDetails->count();
+
+        if ($orderDetail_count>0) {
+            return redirect()->route('orders.index')->with('danger_message', 'Negalima ištrinti pardavimo "'.$order -> id.'", nes jis turi prekių');
+        }
+
+        $order->delete();
+
+        return redirect()->route('orders.index')->with('success_message', 'Pardavimas Nr. "'.$order -> id.'" ištrintas');
+        // $order -> delete();
+
+        // Product::find($order -> orderOrderDetails) -> increment('likutis', $order -> orderOrderDetails -> kiekis);
+        
+        // return redirect()->route('orders.index')->with('danger_message', 'Pardavimas Nr. "'.$order -> id.'" ištrintas');
+        
     
     }
 }

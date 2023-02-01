@@ -3,6 +3,8 @@
 use Illuminate\Database\Seeder;
 use App\Client;
 use App\Product;
+use App\Manufacturer;
+use App\Invoice;
 
 
 class DatabaseSeeder extends Seeder
@@ -17,5 +19,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(UsersTableSeeder::class);
         factory(App\Client::class, 30)->create();
         factory(App\Product::class, 30)->create();
+        factory(App\Manufacturer::class, 3)->create();
+        factory(App\Invoice::class, 10)->create();
     }
 }

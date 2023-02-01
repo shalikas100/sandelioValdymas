@@ -5,7 +5,7 @@
 <div class="container">
     <div class="col-5">
         <div class="head">
-            <h3>{{$client -> klientas}}</h3>
+            <h3>Informacija</h3>
             <a class="btn btn-primary" href="{{route('clients.index')}}">Grįžti į klientų sąrašą</a>
         </div>
         
