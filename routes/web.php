@@ -28,7 +28,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', [ProductController::class, 'index'])->name('home');
+// Route::get('/products/index', [ProductController::class, 'index'])->name('products.index')->middleware('auth');
+
 
 
 // Client
@@ -51,6 +53,8 @@ Route::get('/manufacturers/create', [ManufacturerController::class, 'create'])->
 Route::get('/manufacturers/show/{manufacturer}', [ManufacturerController::class, 'show'])->name('manufacturers.show')->middleware('auth');
 Route::get('/manufacturers/edit/{manufacturer}', [ManufacturerController::class, 'edit'])->name('manufacturers.edit')->middleware('auth');
 Route::get('/manufacturers/searchAjax', [ManufacturerController::class, 'searchAjax'])->name('manufacturers.searchAjax')->middleware('auth');
+Route::get('/manufacturers/showInvoices/{manufacturer}', [ManufacturerController::class, 'showInvoices'])->name('manufacturers.showInvoices')->middleware('auth');
+
 // veiksmas
 Route::post('/manufacturers/store', [ManufacturerController::class, 'store'])->name('manufacturers.store')->middleware('auth');
 Route::post('/manufacturers/update/{manufacturer}', [ManufacturerController::class, 'update'])->name('manufacturers.update')->middleware('auth');
@@ -61,12 +65,12 @@ Route::post('/manufacturers/destroy/{manufacturer}', [ManufacturerController::cl
 // Product
 // Vaizdas
 Route::get('/products/index', [ProductController::class, 'index'])->name('products.index')->middleware('auth');
-Route::get('/products/create', [ProductController::class, 'create'])->name('products.create')->middleware('auth');
+Route::get('/products/create/{invoice}', [ProductController::class, 'create'])->name('products.create')->middleware('auth');
 Route::get('/products/show/{product}', [ProductController::class, 'show'])->name('products.show')->middleware('auth');
 Route::get('/products/edit/{product}', [ProductController::class, 'edit'])->name('products.edit')->middleware('auth');
 Route::get('/products/searchAjax', [ProductController::class, 'searchAjax'])->name('products.searchAjax')->middleware('auth');
 // veiksmas
-Route::post('/products/store', [ProductController::class, 'store'])->name('products.store')->middleware('auth');
+Route::post('/products/store/{invoice}', [ProductController::class, 'store'])->name('products.store')->middleware('auth');
 Route::post('/products/update/{product}', [ProductController::class, 'update'])->name('products.update')->middleware('auth');
 Route::post('/products/destroy/{product}', [ProductController::class, 'destroy'])->name('products.destroy')->middleware('auth');
 

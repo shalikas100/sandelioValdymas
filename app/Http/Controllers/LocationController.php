@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\InvoiceDetail;
+use App\Location;
 use Illuminate\Http\Request;
-use App\Invoice;
-use App\Product;
 
-class InvoiceDetailController extends Controller
+class LocationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -43,10 +41,10 @@ class InvoiceDetailController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\InvoiceDetail  $invoiceDetail
+     * @param  \App\Location  $location
      * @return \Illuminate\Http\Response
      */
-    public function show(InvoiceDetail $invoiceDetail)
+    public function show(Location $location)
     {
         //
     }
@@ -54,10 +52,10 @@ class InvoiceDetailController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\InvoiceDetail  $invoiceDetail
+     * @param  \App\Location  $location
      * @return \Illuminate\Http\Response
      */
-    public function edit(InvoiceDetail $invoiceDetail)
+    public function edit(Location $location)
     {
         //
     }
@@ -66,10 +64,10 @@ class InvoiceDetailController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\InvoiceDetail  $invoiceDetail
+     * @param  \App\Location  $location
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, InvoiceDetail $invoiceDetail)
+    public function update(Request $request, Location $location)
     {
         //
     }
@@ -77,22 +75,11 @@ class InvoiceDetailController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\InvoiceDetail  $invoiceDetail
+     * @param  \App\Location  $location
      * @return \Illuminate\Http\Response
      */
-    public function destroy(InvoiceDetail $invoiceDetail)
+    public function destroy(Location $location)
     {
-        $invoiceDetailProductsQty = $invoiceDetail -> invoiceDetailProducts -> likutis;
-
-        if ($invoiceDetailProductsQty < $invoiceDetail -> inv_kiekis) {
-            return redirect()->back()->with('danger_message', 'Negalima ištrinti pajamavimo prekės "'.$invoiceDetail -> invoiceDetailProducts ->kodas.'", nes prekė yra parduota');
-        }
-
-        $invoiceDetail -> delete();
-
-        Product::find($invoiceDetail -> inv_product_id) -> decrement('likutis', $invoiceDetail -> inv_kiekis);
-
-
-        return redirect()->back()->with('success_message', 'Pajamavimo prekė "'.$invoiceDetail -> invoiceDetailProducts ->kodas.'", ištrinta');
+        //
     }
 }

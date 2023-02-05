@@ -8,7 +8,7 @@
                 <a class="btn btn-primary" href="{{route('products.index')}}">Grįžti į prekių sąrašą</a>
         </div>
     <div class="form">
-    <form action="{{route('products.store')}}" method="post">
+    <form action="{{route('products.store', $invoice)}}" method="post">
 
         @csrf
         
@@ -75,18 +75,9 @@
                     <td>
                     
                         <select name="gamintojas" id="gamintojas" class="form-control @error('gamintojas') is-invalid @enderror" value="{{old('gamintojas')}}" placeholder="Vnt. dėžėje">
-                            <option value="" disabled selected>Pasirinkite gamintoją</option>
-                            @foreach($manufacturers as $manufacturer)
-                                <option value="{{$manufacturer -> manufacturer}}"> {{$manufacturer -> manufacturer}}</option>
-                            @endforeach
+                                <option value="{{$invoice -> manufacturer_id}}"> {{$invoice -> invoiceManufacturer -> manufacturer}}</option> 
                         </select>
-                    
-                    
-                    
-                    
-                    
-                    
-                    <!-- <input type="text" name="gamintojas" class="form-control @error('gamintojas') is-invalid @enderror" value="{{old('gamintojas')}}" placeholder="Gamintojas"> -->
+  
                                     @error('gamintojas')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -106,7 +97,9 @@
                 </tr>
                 <tr>
                     <th>Vieta sandėlyje</th>
-                    <td><input type="text" name="vieta_sandelyje" class="form-control @error('vieta_sandelyje') is-invalid @enderror" value="{{old('vieta_sandelyje')}}" placeholder="Vieta sandėlyje">
+                    <td><input type="text" name="vieta_sandelyje" class="form-control @error('vieta_sandelyje') is-invalid @enderror" value="{{old('vieta_sandelyje')}}" placeholder="Sekcija">
+                        <input type="text" name="vieta_sandelyje" class="form-control @error('vieta_sandelyje') is-invalid @enderror" value="{{old('vieta_sandelyje')}}" placeholder="Vieta">
+                        <input type="text" name="vieta_sandelyje" class="form-control @error('vieta_sandelyje') is-invalid @enderror" value="{{old('vieta_sandelyje')}}" placeholder="Aukštas">
                                     @error('vieta_sandelyje')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

@@ -12,11 +12,7 @@
     <div class="row">
         <div class="col-6">
             <h3>Pajamavimo kūrimas</h3>
-                    @if(session('success_message'))
-                        <div class="alert alert-success">
-                            {{ session('success_message')}}
-                        </div>
-                    @endif
+                    
                     @if(session('danger_message'))
                         <div class="alert alert-danger">
                             {{ session('danger_message')}}
@@ -30,7 +26,7 @@
                         <tr>
                             <th>Pasirinkite gamintoją</th>
                             <td><select name="manufacturer_id" id="manufacturer_id" class="form-control @error('manufacturer_id') is-invalid @enderror"> 
-                                <option value=""></option>   
+                                <option value="" disabled selected>Pasirinkite gamintoją</option>   
                                     @foreach($manufacturers as $manufacturer)
                                 <option value="{{$manufacturer -> id}}">{{$manufacturer -> manufacturer}}</option>
                                     @endforeach
@@ -46,10 +42,16 @@
                         <tr>
                             <th>Perkama ar grąžinama</th>
                             <td>
-                                <select name="" id="">
+                                <select name="pirkimas_grazinimas" id="pirkimas_grazinimas" class="form-control @error('pirkimas_grazinimas') is-invalid @enderror">
+                                    <option value="" disabled selected>Pirkimas/Grąžinimas</option>
                                     <option value="Pirkimas">Pirkimas</option>
-                                    <option value="Grąžinimas">Grąžinimas</option>
+                                    <option value="Grąžinimas">Gražinimas</option>
                                 </select>
+                                    @error('pirkimas_grazinimas')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                 
                             </td>
                         </tr>
@@ -69,10 +71,15 @@
     <div class="col-4">
             <form id="searchAjax" url-invoices-ajax-action="{{route('invoices.searchAjax')}}">
                 @csrf
-                <input id="search" type="text" name="search" placeholder="Kliento paieška">
+                <input id="search_invoice" type="text" name="search" placeholder="Kliento paieška">
             </form>
     </div>
     </div>
+    @if(session('success_message'))
+                        <div class="alert alert-success">
+                            {{ session('success_message')}}
+                        </div>
+                    @endif
     <div class="row">
         <div class="col-8">
             <table class="table table-hover">
@@ -80,6 +87,7 @@
                 <tr>
                     <th>Pajamavimo nr.</th>
                     <th>Gamintojas</th>
+                    <th>Pirkimas/Grąžinimas</th>
                     <th>Sukūrimo data</th>
                     <th>Veiksmai</th>
                     <th></th>
@@ -88,8 +96,9 @@
                 <tbody class="invoices">
                 @foreach($invoices as $invoice)
                 <tr>
-                    <td>{{$invoice -> id}}</td>
+                    <td>{{str_pad($invoice -> id, 7, 'PAJ000', STR_PAD_LEFT)}}</td>
                     <td>{{$invoice -> invoiceManufacturer -> manufacturer}}</td>
+                    <td>{{$invoice -> pirkimas_grazinimas}}</td>
                     <td>{{$invoice -> created_at -> format('Y-m-d')}}</td>
                     <td><a class="btn btn-primary" href="{{route('invoices.show', $invoice)}}">Pildyti</a></td>
                     <td><a class="btn btn-secondary"  href="{{route('invoices.edit', $invoice)}}">Keisti</a></td>

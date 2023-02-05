@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 
-    $('#search').on('input', function(e){
+    $('#search_client').on('input', function(e){
         var route = $('#searchAjax').attr('url-clients-ajax-action')+'?search='+$(this).val();
         var method = "GET";
 

@@ -26,7 +26,11 @@
                     <table class="table">
                         <tr>
                             <th>Pajamavimo nr.</th>
-                            <td>{{$invoice -> id}}</td>
+                            <td>{{str_pad($invoice -> id, 7, 'PAJ000', STR_PAD_LEFT)}}</td>
+                        </tr>
+                        <tr>
+                            <th>Pirkimas/Grąžinimas</th>
+                            <td>{{$invoice -> pirkimas_grazinimas}}</td>
                         </tr>
                         <tr>
                             <th>Pajamavimo data</th>
@@ -52,12 +56,15 @@
                 <form action="{{route('invoices.storeProducts')}}" method="post">
                 @csrf
                     <input type="hidden" name="inv_details_id" placeholder="inv_details_id" value="{{$invoice -> id}}">
-                    <a class="btn btn-primary" href="{{route('products.create')}}">Sukurti prekę</a>
+
+                    <a class="btn btn-primary" href="{{route('products.create', $invoice)}}">Sukurti prekę</a>
+
                     <select name="inv_product_id" id="inv_product_id" class="form-control mb-2 @error('inv_product_id') is-invalid @enderror">
                         @foreach($allProducts as $product)
-                        <option value="{{$product -> id}}">{{$product -> kodas}}, Likutis {{$product -> likutis}}</option>
+                             <option value="{{$product -> id}}">{{$product -> pavadinimas}}, Likutis {{$product -> likutis}}</option>   
                         @endforeach
                     </select>
+
                         @error('inv_product_id')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

@@ -37,6 +37,30 @@ class OrderController extends Controller
         return view('orders.index', ['orders' => $orders, 'clients' => $clients]);
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'client_id' => 'required|integer',
+            'pristatymo_budas' => 'required',
+        ]);
+
+        $order = new Order();
+
+        $order -> client_id = $request -> client_id;
+        $order -> pristatymo_budas = $request -> pristatymo_budas;
+
+        $order -> save();
+
+        return redirect()->route('orders.index')->with('success_message', 'Naujo pardavimo Nr. '.$order -> id.'. Pildyti');
+    }
+
+    
     public function createProducts()
     {
         $orderDetails = OrderDetail::all();
@@ -72,30 +96,6 @@ class OrderController extends Controller
         
         return back();
 
-    }
-
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'client_id' => 'required|integer',
-            'pristatymo_budas' => 'required',
-        ]);
-
-        $order = new Order();
-
-        $order -> client_id = $request -> client_id;
-        $order -> pristatymo_budas = $request -> pristatymo_budas;
-
-        $order -> save();
-
-        return redirect()->route('orders.index')->with('success_message', 'Naujo pardavimo Nr. '.$order -> id.'. Pildyti');
     }
 
     /**

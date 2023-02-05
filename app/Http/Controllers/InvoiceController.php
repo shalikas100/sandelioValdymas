@@ -17,8 +17,8 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-
         $manufacturers = Manufacturer::all();
+
         $invoices = Invoice::all();
 
         return view('invoices.index', ['manufacturers' => $manufacturers, 'invoices' => $invoices]);
@@ -29,12 +29,7 @@ class InvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        $manufacturers = Manufacturer::all();
-        $invoices = Invoice::all();
-        return view('invoices.index', ['invoices' => $invoices, 'manufacturers' => $manufacturers]);
-    }
+    
 
     public function createProducts()
     {
@@ -44,7 +39,6 @@ class InvoiceController extends Controller
 
     public function storeProducts(Request $request)
     {
-
         $request->validate([
             'inv_product_id' => 'required|integer',
             'inv_kiekis' => 'required|integer|gt:0',
@@ -64,6 +58,13 @@ class InvoiceController extends Controller
 
     }
 
+    public function create()
+    {
+        $manufacturers = Manufacturer::all();
+        $invoices = Invoice::all();
+        return view('invoices.index', ['invoices' => $invoices, 'manufacturers' => $manufacturers]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -74,15 +75,17 @@ class InvoiceController extends Controller
     {
         $request -> validate([
             'manufacturer_id' => 'required|integer',
+            'pirkimas_grazinimas' => 'required',
         ]);
 
         $invoice = new Invoice();
 
         $invoice -> manufacturer_id = $request -> manufacturer_id;
+        $invoice -> pirkimas_grazinimas = $request -> pirkimas_grazinimas;
 
         $invoice -> save();
 
-        return redirect()->route('invoices.index')->with('success_message', 'Pajamavimas sukurtas');
+        return redirect()->route('invoices.index')->with('success_message', 'Pajamavimas "'.str_pad($invoice -> id, 7, 'PAJ000', STR_PAD_LEFT).'" sukurtas');
     }
 
     /**
@@ -93,7 +96,8 @@ class InvoiceController extends Controller
      */
     public function show(Invoice $invoice)
     {
-        $allProducts = Product::all();
+        $allProducts = Product::all()->where('gamintojas', '=', $invoice -> manufacturer_id);
+
         return view('invoices.show', ['invoice' => $invoice, 'allProducts' => $allProducts]);
     }
 
@@ -106,6 +110,7 @@ class InvoiceController extends Controller
     public function edit(Invoice $invoice)
     {
         $manufacturers = Manufacturer::all();
+        
         return view('invoices.edit', ['invoice' => $invoice, 'manufacturers' => $manufacturers]);
     }
 
@@ -150,7 +155,6 @@ class InvoiceController extends Controller
     {
 
         $search = request() -> query('search');
-
         $invoices = Invoice::where('manufacturer_id', 'LIKE', "%$search%")->get();
 
         return response()->json($invoices);

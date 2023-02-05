@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Manufacturer;
 use Illuminate\Http\Request;
+use App\Invoice;
+use App\Order;
+use App\OrderDetail;
+use App\InvoiceDetail;
+use App\Product;
+use App\Client;
 
 class ManufacturerController extends Controller
 {
@@ -16,6 +22,11 @@ class ManufacturerController extends Controller
     {
         $manufacturers = Manufacturer::all();
 
+        // $klientas = $manufacturers->find(4);
+
+        // dd($klientas);
+        
+            
         return view('manufacturers.index', ['manufacturers' => $manufacturers]);
     }
 
@@ -60,6 +71,13 @@ class ManufacturerController extends Controller
     public function show(Manufacturer $manufacturer)
     {
         return view('manufacturers.show', ['manufacturer' => $manufacturer]);
+    }
+
+    public function showInvoices(Manufacturer $manufacturer)
+    {
+        $invoices = Invoice::all()->where('manufacturer_id', '=', $manufacturer -> id);
+        
+        return view('manufacturers.showInvoices', ['invoices' => $invoices, 'manufacturer' => $manufacturer]);
     }
 
     /**
@@ -117,7 +135,7 @@ class ManufacturerController extends Controller
 
     public function searchAjax()
     {
-
+       
         $search = request() -> query('search');
 
         $manufacturers = Manufacturer::where('manufacturer', 'LIKE', "%$search%")

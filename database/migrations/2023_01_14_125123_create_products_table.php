@@ -21,7 +21,8 @@ class CreateProductsTable extends Migration
             $table->integer('likutis');
             $table->integer('svoris');
             $table->integer('vnt_dezeje');
-            $table->string('gamintojas');
+            $table->unsignedBigInteger('gamintojas');
+            $table->foreign('gamintojas')->references('id')->on('manufacturers');
             $table->string('tipas');
             $table->string('vieta_sandelyje');
             $table->timestamps();

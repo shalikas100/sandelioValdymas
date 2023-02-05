@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Product;
 use Illuminate\Http\Request;
 use App\Manufacturer;
+use App\Invoice;
+use App\InvoiceDetail;
 
 class ProductController extends Controller
 {
@@ -25,12 +27,14 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($invoice)
     {
+    
+        $invoice = Invoice::all()->find($invoice);
 
         $manufacturers = Manufacturer::all();
-
-        return view('products.create', ['manufacturers' => $manufacturers]);
+    
+        return view('products.create', ['manufacturers' => $manufacturers, 'invoice' => $invoice]);
     }
 
     /**
@@ -39,16 +43,16 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $invoice)
     {
         $request->validate([
             'kodas' => 'required|min:2|max:20|alpha_dash',
             'barkodas' => 'required|integer|digits_between:3,20',
             'pavadinimas' => 'required|min:2|max:64',
             // 'likutis' => 'required|numeric|gte:0',
-            'svoris' => 'required|numeric|between:0,1000.00',
+            'svoris' => 'required|numeric|between:0,3000.00',
             'vnt_dezeje' => 'required|integer|digits_between:1,10000',
-            'gamintojas' => 'required|min:2|max:64',
+            'gamintojas' => 'required|integer',
             'tipas' => 'required|min:2|max:20',
             'vieta_sandelyje' => 'required|min:0|max:12|alpha_dash',
         ]);
@@ -67,7 +71,8 @@ class ProductController extends Controller
 
         $product->save();
 
-        return redirect()->route('products.index')->with('success_message', 'Prekė kodu "'.$product -> kodas.'" sukurta sėkmingai');
+
+        return redirect()->route('invoices.show', ['invoice' => $invoice])->with('success_message', 'Prekė kodu "'.$product -> kodas.'" sukurta sėkmingai');
 
     }
 
@@ -107,11 +112,11 @@ class ProductController extends Controller
             'barkodas' => 'required|integer|digits_between:3,20',
             'pavadinimas' => 'required|min:2|max:64',
             'likutis' => 'required|integer|gt:0',
-            'svoris' => 'required|numeric|between:0,1000.00',
+            'svoris' => 'required|numeric|between:0,3000.00',
             'vnt_dezeje' => 'required|integer|digits_between:1,10000',
-            'gamintojas' => 'required|min:2|max:20',
+            'gamintojas' => 'required|integer',
             'tipas' => 'required|min:2|max:20',
-            'vieta_sandelyje' => 'required|min:2|max:12|alpha_dash',
+            'vieta_sandelyje' => 'required|min:0|max:12|alpha_dash',
         ]);
 
         $product -> kodas = $request -> kodas;

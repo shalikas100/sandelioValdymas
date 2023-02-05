@@ -16,13 +16,12 @@
             
     <div class="head">
         <h2>Prekės</h2>
-        <!-- <a class="btn btn-primary" href="{{route('products.create')}}">Sukurti naują prekę</a> -->
     </div>
     <hr>
     <div class="row">
         <div class="col-4">
-            <form id="searchAjax" url-products-ajax-action="{{route('products.searchAjax')}}">
-                <input id="search" type="text" name="search" placeholder="Prekės paieška">
+            <form id="searchAjax" data-ajax-action-url="{{route('products.searchAjax')}}">
+                <input id="search_product" type="text" name="search" placeholder="Prekės paieška">
             </form>
         </div>
     </div>

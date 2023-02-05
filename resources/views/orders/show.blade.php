@@ -78,7 +78,7 @@
                     <select name="product_id" id="product_id" class="form-control mb-2 @error('product_id') is-invalid @enderror">
                         <option value="" disabled selected>Pasitinkite prekę</option>
                         @foreach($allProducts as $product)
-                        <option value="{{$product -> id}}">{{$product -> kodas}}, Likutis {{$product -> likutis}}</option>
+                        <option value="{{$product -> id}}">{{$product -> productManufacturers -> manufacturer}},{{$product -> kodas}},{{$product -> pavadinimas}}, Likutis {{$product -> likutis}}</option>
                         @endforeach
                     </select>
                         @error('product_id')

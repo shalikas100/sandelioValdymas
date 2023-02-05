@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 
-    $('#search').on('input', function(e){
+    $('#search_invoice').on('input', function(e){
         var route = $('#searchAjax').attr('url-invoices-ajax-action')+'?search='+$(this).val();
         var method = "GET";
 
@@ -22,7 +22,7 @@ $(document).ready(function(){
                 for(var i = 0; i < response.length; i++){ 
                     generateHtml += '<tr>';
                     generateHtml += '<td>'+response[i].id+'</td>';
-                    generateHtml += '<td>'+response[i].manufacturer_id+'</td>';
+                    generateHtml += '<td>'+response[i].manufacturer +'</td>';
                     generateHtml += '<td>'+response[i].created_at+'</td>';
                     generateHtml += '<td>'+'<a class="btn btn-primary" href="show/'+response[i].id+'">Rodyti</a>'+'</td>';
                     generateHtml += '</tr>';

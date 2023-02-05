@@ -1,8 +1,14 @@
 <?php
 
 namespace App;
+
 use App\Order;
 use App\OrderDetail;
+use App\Invoice;
+use App\InvoiceDetail;
+use App\Manufacturer;
+use App\Product;
+
 
 use Illuminate\Database\Eloquent\Model;
 

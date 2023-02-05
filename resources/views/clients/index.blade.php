@@ -30,7 +30,7 @@
         <div class="col-4">
             <form id="searchAjax" url-clients-ajax-action="{{route('clients.searchAjax')}}">
                 @csrf
-                <input id="search" type="text" name="search" placeholder="Kliento paieška">
+                <input id="search_client" type="text" name="search" placeholder="Kliento paieška">
             </form>
         </div>
     </div>

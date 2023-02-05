@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
-    $('#search').on('input', function(e){
-        var route = $('#searchAjax').attr('url-products-ajax-action')+'?search='+$(this).val();
+    $('#search_product').on('input', function(e){
+        var route = $('#searchAjax').attr('data-ajax-action-url')+'?search='+$(this).val();
         var method = "GET";
 
         $.ajax({
@@ -38,8 +38,6 @@ $(document).ready(function(){
 
             }
         })
-
-        console.log(route)
     })
 
 })

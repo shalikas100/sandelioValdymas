@@ -23,7 +23,6 @@
     <link rel="stylesheet" href="{{ asset('css/products/productsStyle.css')}}">
     <link rel="stylesheet" href="{{ asset('css/orders/OrdersStyle.css')}}">
 
-
 </head>
 <body>
     <div id="app">
@@ -46,6 +45,7 @@
                         <li class="nav-item"><a class="nav-link" href="{{route('orders.index')}}">Pardavimai</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{route('invoices.index')}}">Pajamavimai</a></li>
                         <li class="nav-item"><a class="nav-link" href="">Inventorizavimai</a></li>
+                        <li class="nav-item"><a class="nav-link" href="">Surasti prekę sandėlyje</a></li>
                     </ul>
                     @endauth
                     <!-- Right Side Of Navbar -->
@@ -90,9 +90,8 @@
         </main>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>  
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{asset('js/ajax-clients.js')}}"></script>
     <script src="{{asset('js/ajax-manufacturers.js')}}"></script>
     <script src="{{asset('js/ajax-products.js')}}"></script>

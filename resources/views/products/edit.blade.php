@@ -48,16 +48,16 @@
                                     @enderror
                     </td>
                 </tr>
-                <tr>
-                    <th>Likutis</th>
-                    <td><input type="text" name="likutis" class="form-control @error('likutis') is-invalid @enderror" value="{{old('likutis') ?? $product -> likutis}}" placeholder="Adresas g. x - x">
+                
+                    
+                    <input type="hidden" name="likutis" class="form-control @error('likutis') is-invalid @enderror" value="{{old('likutis') ?? $product -> likutis}}" placeholder="Adresas g. x - x">
                                     @error('likutis')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
-                    </td>
-                </tr>
+                    
+                
                 <tr>
                     <th>Vnt. svoris (kg) </th>
                     <td><input type="text" name="svoris" class="form-control @error('svoris') is-invalid @enderror" value="{{old('svoris') ?? $product -> svoris}}" placeholder="Adresas g. x - x">

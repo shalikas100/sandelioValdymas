@@ -17,7 +17,7 @@
             
             @if(isset($search))
             <div class="success">
-                <p class=""success>Paieškos rezultatas pagal raktažodį: {{$search}}</p>
+                <p class="success">Paieškos rezultatas pagal raktažodį: {{$search}}</p>
             </div>
             @endif
 
@@ -30,7 +30,7 @@
         <div class="col-4">
             <form id="searchAjax" url-manufacturers-ajax-action="{{route('manufacturers.searchAjax')}}">
                 @csrf
-                <input id="search" type="text" name="search" placeholder="Gamintojo paieška">
+                <input id="search_manufacturer" type="text" name="search" placeholder="Gamintojo paieška">
             </form>
         </div>
     </div>
@@ -40,6 +40,7 @@
                 <tr>
                     <th>Eil. Nr.</th>
                     <th>Gamintojas</th>
+                    <th>Gamintojo ID</th>
                     <th>Kiek kartu pajamuota</th>
                     <th>Veiksmai</th>
                 </tr>
@@ -49,7 +50,8 @@
                 <tr>
                     <td>{{$loop -> iteration}}</td>
                     <td>{{$manufacturer -> manufacturer}}</td>
-                    <td><a class="btn btn-light" href="{{route('invoices.index')}}">{{$manufacturer -> manufacturerInvoice -> count()}}</a></td>
+                    <th>{{$manufacturer -> id}}</th>
+                    <td><a id="manufacturerInvoices_count" class="btn btn-light" href="{{route('manufacturers.showInvoices', $manufacturer)}}">{{$manufacturer -> manufacturerInvoice -> count()}}</a></td>
                     <td><a class="btn btn-primary" href="{{route('manufacturers.show', $manufacturer)}}">Rodyti</a></td>
                 </tr>
             @endforeach
