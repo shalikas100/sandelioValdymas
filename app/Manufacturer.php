@@ -8,6 +8,7 @@ use App\OrderDetail;
 use App\InvoiceDetail;
 use App\Product;
 use App\Client;
+use App\Location;
 
 use Illuminate\Database\Eloquent\Model;
 

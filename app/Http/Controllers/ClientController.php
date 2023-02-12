@@ -44,9 +44,10 @@ class ClientController extends Controller
             'miestas' => 'required|min:2|max:64',
             'pasto_kodas' => 'required|integer|digits_between:5,5',
             'telefonas' => 'required|integer|digits_between:11,11',
-            'el_pastas' => 'required|email',
+            'el_pastas' => 'required|email|unique:clients',
+        ],[],[
+            'im_kodas' => 'imones kodas',
         ]);
-
 
         $client = new Client();
 
@@ -101,8 +102,10 @@ class ClientController extends Controller
             'miestas' => 'required|min:2|max:64',
             'pasto_kodas' => 'required|integer|digits_between:5,5',
             'telefonas' => 'required|integer|digits_between:11,11',
-            'el_pastas' => 'required|email',
+            'el_pastas' => 'required|email|unique:clients,el_pastas,'.$client->id,
         ]);
+
+      
 
         $client -> im_kodas = $request -> im_kodas;
         $client -> klientas = $request -> klientas;
@@ -114,7 +117,7 @@ class ClientController extends Controller
 
         $client->save();
 
-        return redirect()->route('clients.index')->with('success_message', 'Klientas "'.$client -> klientas.'" atnaujintas sėkmingai');
+        return redirect()->back()->with('success_message', 'Klientas "'.$client -> klientas.'" atnaujintas sėkmingai');
     }
 
     /**
@@ -125,12 +128,10 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-
-
         $clientOrders_count = $client -> clientOrders -> count();
 
         if ($clientOrders_count>0) {
-            return redirect()->route('clients.index')->with('danger_message', 'Negalima ištrinti kliento "'.$client -> klientas.'", nes jis turi pardavimų');
+            return redirect()->back()->with('danger_message', 'Negalima ištrinti kliento "'.$client -> klientas.'", nes jis turi pardavimų');
         }
 
         $client -> delete();
@@ -152,8 +153,5 @@ class ClientController extends Controller
                             ->get();
 
         return response()->json($clients);
-    }
-
-
-    
+    }  
 }

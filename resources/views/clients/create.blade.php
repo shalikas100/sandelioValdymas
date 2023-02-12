@@ -4,8 +4,8 @@
 <div class="container">
     <div class="col-6">
         <div class="head">
-                <h3>Kliento kūrimas</h3>
-                <a class="btn btn-primary" href="{{route('clients.index')}}">Grįžti į klientų sąrašą</a>
+                <h3><i class="fa-solid fa-user-plus"></i> Kliento kūrimas</h3>
+                <a class="btn btn-primary" href="{{route('clients.index')}}"><i class="fa-solid fa-circle-chevron-left"></i> Grįžti į klientų sąrašą</a>
         </div>
         <div class="form">
             <form action="{{route('clients.store')}}" method="post">
@@ -86,7 +86,7 @@
                         </tr>
                         <tr>
                             <th>Veiksmai</th>
-                            <td><button class="btn btn-primary" type="submit">Įrašyti klientą</button></td>
+                            <td><button class="btn btn-primary" type="submit"><i class="fa-solid fa-floppy-disk"></i> Įrašyti klientą</button></td>
                         </tr>
                         
                     </table>

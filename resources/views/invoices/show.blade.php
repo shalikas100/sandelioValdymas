@@ -15,7 +15,7 @@
             @endif
 
             <div class="header" style="display:flex; justify-content: end">
-                <div class="col-2"><a class="btn btn-primary" href="{{route('invoices.index')}}">Grįžti į pajamavimus</a></div>             
+                <div class="col-2"><a class="btn btn-primary" href="{{route('invoices.index')}}"><i class="fa-solid fa-circle-chevron-left"></i> Grįžti į pajamavimus</a></div>             
             </div>
     <hr>
     <div style="display:flex;">
@@ -44,6 +44,8 @@
                             <th>Gamintojas</th>
                             <td>{{$invoice -> invoiceManufacturer -> manufacturer}}</td>
                         </tr>
+                            <th></th>
+                            <td><a class="btn btn-primary" href="{{route('manufacturers.showInvoices', $invoice -> manufacturer_id)}}">Gamintojo visi pajamavimai</a></td>
                     </table>
                     <hr>
             </div>    
@@ -52,14 +54,17 @@
         <div class="table col-8">
             <!-- prekiu forma -->
             <div class="col-6 form">  
+                
                 <h3>Prekės įvedimas</h5>     
+                
                 <form action="{{route('invoices.storeProducts')}}" method="post">
                 @csrf
                     <input type="hidden" name="inv_details_id" placeholder="inv_details_id" value="{{$invoice -> id}}">
-
-                    <a class="btn btn-primary" href="{{route('products.create', $invoice)}}">Sukurti prekę</a>
-
+                   
+                    <a class="btn btn-primary mb-2" href="{{route('products.create', $invoice)}}"><i class="fa-solid fa-plus"></i><i class="fa-solid fa-dolly"></i> Sukurti prekę</a>
+                    
                     <select name="inv_product_id" id="inv_product_id" class="form-control mb-2 @error('inv_product_id') is-invalid @enderror">
+                            <option value="" disabled selected>Pasirinkite prekę</option>
                         @foreach($allProducts as $product)
                              <option value="{{$product -> id}}">{{$product -> pavadinimas}}, Likutis {{$product -> likutis}}</option>   
                         @endforeach
@@ -80,7 +85,6 @@
 
                     <button class="btn-xs btn-primary" type="submit">Įtraukti</button>
                 </form>
-                
             </div>
             <hr>
             <div class="table">
@@ -101,7 +105,7 @@
                     <td>{{$invoiceDetail -> invoiceDetailProducts -> pavadinimas}}</td>
                     <td>{{$invoiceDetail -> inv_kiekis}}</td>
                     <td>{{$invoiceDetail -> inv_kiekis * $invoiceDetail -> invoiceDetailProducts -> svoris}} kg</td>  
-                    <td>{{$invoiceDetail -> invoiceDetailProducts -> vieta_sandelyje}}</td>
+                    <td>{{$invoiceDetail -> invoiceDetailProducts -> productLocations -> sekcija_vieta_aukstas}}</td>
                     <td>
                         <form action="{{route('invoiceDetails.destroy', $invoiceDetail)}}" method="post">
                             @csrf

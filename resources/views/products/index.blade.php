@@ -15,7 +15,7 @@
             @endif
             
     <div class="head">
-        <h2>Prekės</h2>
+        <h2><i class="fa-solid fa-dolly"></i> Prekės</h2>
     </div>
     <hr>
     <div class="row">
@@ -26,6 +26,7 @@
         </div>
     </div>
     <div class="table">
+    <i style="font-size:12px;">* - (sekcija-vieta-aukštas)</i>
         <table class="table table-hover">
             <thead>
             <tr>
@@ -35,10 +36,10 @@
                 <th>Pavadinimas</th>
                 <th>Likutis</th>
                 <th>Vnt. svoris (kg)</th>
-                <th>Vnt. dėžėje</th>
+                <th>Vnt. pakuotėje</th>
                 <th>Gamintojas</th>
                 <th>Tipas</th>
-                <th>Vieta sandėlyje</th>
+                <th>Vieta sandėlyje*</th>
                 <th>Veiksmai</th>
             </tr>
             </thead>
@@ -53,11 +54,11 @@
                 <td>{{$product -> svoris}}</td>
                 <td>{{$product -> vnt_dezeje}}</td>
 
-                <td>{{$product -> gamintojas}}</td>
+                <td>{{$product -> productManufacturers -> manufacturer}}</td>
                 
                 <td>{{$product -> tipas}}</td>
-                <td>{{$product -> vieta_sandelyje}}</td>
-                <td><a class="btn btn-primary" href="{{route('products.show', $product)}}">Rodyti</a></td>
+                <td>{{$product -> productLocations -> sekcija_vieta_aukstas}}</td>
+                <td><a class="btn btn-primary" href="{{route('products.show', $product)}}"><i class="fa-solid fa-magnifying-glass"></i></a></td>
             </tr>
             @endforeach
             </tbody>

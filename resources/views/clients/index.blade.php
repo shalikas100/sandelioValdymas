@@ -22,8 +22,8 @@
             @endif
 
     <div class="head">
-        <h2>Klientai</h2>
-        <a class="btn btn-primary" href="{{route('clients.create')}}">Sukurti naują klientą</a>
+        <h2><i class="fa-solid fa-users-line"></i> Klientai</h2>
+        <a class="btn btn-primary" href="{{route('clients.create')}}"><i class="fa-solid fa-user-plus"></i> Sukurti naują klientą</a>
     </div>
     <hr>
     <div class="row">
@@ -60,7 +60,7 @@
                     <td>{{$client -> pasto_kodas}}</td>
                     <td>{{$client -> telefonas}}</td>
                     <td>{{$client -> el_pastas}}</td>
-                    <td><a class="btn btn-primary" href="{{route('clients.show', $client)}}">Rodyti</a></td>
+                    <td><a class="btn btn-primary" href="{{route('clients.show', $client)}}"><i class="fa-solid fa-magnifying-glass"></i></a></td>
                 </tr>
             @endforeach
             </tbody>

@@ -9,7 +9,7 @@
             @endif
 
             <div class="header" style="display:flex; justify-content: end">
-                <div class="col-2"><a class="btn btn-primary" href="{{route('orders.index')}}">Grįžti į pardavimus</a></div>             
+                <div class="col-2"><a class="btn btn-primary" href="{{route('orders.index')}}"><i class="fa-solid fa-circle-chevron-left"></i> Grįžti į pardavimus</a></div>             
             </div>
     <hr>
     <div style="display:flex;">
@@ -117,7 +117,7 @@
                     <td>{{$orderDetail -> orderDetailProducts -> pavadinimas}}</td>
                     <td>{{$orderDetail -> kiekis}}</td>
                     <td>{{$orderDetail -> kiekis * $orderDetail -> orderDetailProducts -> svoris}} kg</td>  
-                    <td>{{$orderDetail -> orderDetailProducts -> vieta_sandelyje}}</td>
+                    <td>{{$orderDetail -> orderDetailProducts -> productLocations -> sekcija_vieta_aukstas}}</td>
                     <td>
                         <form action="{{route('orderDetails.destroy', $orderDetail)}}" method="post">
                             @csrf

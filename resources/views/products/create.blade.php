@@ -4,8 +4,8 @@
 <div class="container">
 <div class="col-6">
 <div class="head">
-                <h3>Prekės kūrimas</h3>
-                <a class="btn btn-primary" href="{{route('products.index')}}">Grįžti į prekių sąrašą</a>
+                <h3><i class="fa-solid fa-plus"></i><i class="fa-solid fa-dolly"></i> Prekės kūrimas</h3>
+                <a class="btn btn-primary" href="{{route('products.index')}}"><i class="fa-solid fa-circle-chevron-left"></i> Grįžti į prekių sąrašą</a>
         </div>
     <div class="form">
     <form action="{{route('products.store', $invoice)}}" method="post">
@@ -61,7 +61,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <th>Vnt. dėžėje</th>
+                    <th>Vnt. pakuotėje</th>
                     <td><input type="text" name="vnt_dezeje" class="form-control @error('vnt_dezeje') is-invalid @enderror" value="{{old('vnt_dezeje')}}" placeholder="Vnt. dėžėje">
                                     @error('vnt_dezeje')
                                     <span class="invalid-feedback" role="alert">
@@ -97,9 +97,13 @@
                 </tr>
                 <tr>
                     <th>Vieta sandėlyje</th>
-                    <td><input type="text" name="vieta_sandelyje" class="form-control @error('vieta_sandelyje') is-invalid @enderror" value="{{old('vieta_sandelyje')}}" placeholder="Sekcija">
-                        <input type="text" name="vieta_sandelyje" class="form-control @error('vieta_sandelyje') is-invalid @enderror" value="{{old('vieta_sandelyje')}}" placeholder="Vieta">
-                        <input type="text" name="vieta_sandelyje" class="form-control @error('vieta_sandelyje') is-invalid @enderror" value="{{old('vieta_sandelyje')}}" placeholder="Aukštas">
+                    <td>
+                        <select class="form-control" name="vieta_sandelyje" id="">
+                                <option selected disabled  value="">Pasirinkite sekciją</option>
+                            @foreach($locations as $location)
+                                <option value="{{$location->id}}">{{$location -> sekcija_vieta_aukstas}}</option>
+                            @endforeach
+                        </select>
                                     @error('vieta_sandelyje')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -109,7 +113,12 @@
                 </tr>
                 <tr>
                     <th>Veiksmai</th>
-                    <td><button class="btn btn-primary" type="submit">Įrašyti prekę</button></td>
+                    <td><button class="btn btn-primary" type="submit"><i class="fa-solid fa-floppy-disk"></i> Įrašyti prekę</button></td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td><a class="btn btn-primary" href="{{route('invoices.show', $invoice)}}"><i class="fa-solid fa-circle-chevron-left"></i> Grįžti į pajamavimą</a></td>
+
                 </tr>
                 
             </table>

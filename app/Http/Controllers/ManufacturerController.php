@@ -10,6 +10,7 @@ use App\OrderDetail;
 use App\InvoiceDetail;
 use App\Product;
 use App\Client;
+use App\Location;
 
 class ManufacturerController extends Controller
 {
@@ -22,11 +23,6 @@ class ManufacturerController extends Controller
     {
         $manufacturers = Manufacturer::all();
 
-        // $klientas = $manufacturers->find(4);
-
-        // dd($klientas);
-        
-            
         return view('manufacturers.index', ['manufacturers' => $manufacturers]);
     }
 
@@ -56,6 +52,14 @@ class ManufacturerController extends Controller
         $manufacturer = new Manufacturer();
 
         $manufacturer -> manufacturer = $request -> manufacturer;
+
+        $exist = Manufacturer::where('manufacturer', '=', $request -> manufacturer)->count() > 0;
+ 
+        // dd($exist);
+        if($exist == true){
+        return redirect()->route('manufacturers.index')->with('danger_message', 'Toks gamintojas jau egzistuoja');
+            
+        }
 
         $manufacturer -> save();
 
@@ -108,7 +112,7 @@ class ManufacturerController extends Controller
 
         $manufacturer -> save();
 
-        return redirect()->route('manufacturers.index')->with('success_message', 'Gamintojas "'.$manufacturer -> manufacturer.'" atnaujintas sėkmingai');
+        return redirect()->back()->with('success_message', 'Gamintojas "'.$manufacturer -> manufacturer.'" atnaujintas sėkmingai');
 
     }
 
@@ -120,11 +124,11 @@ class ManufacturerController extends Controller
      */
     public function destroy(Manufacturer $manufacturer)
     {
-
+        
         $manufacturerInvoices_count = $manufacturer -> manufacturerInvoice -> count();
 
         if ($manufacturerInvoices_count>0) {
-            return redirect()->route('manufacturers.index')->with('danger_message', 'Negalima ištrinti gamintojo "'.$manufacturer -> manufacturer.'", nes jis turi pajamavimų');
+            return redirect()->back()->with('danger_message', 'Negalima ištrinti gamintojo "'.$manufacturer -> manufacturer.'", nes jis turi pajamavimų');
         }
 
         $manufacturer -> delete();
@@ -135,13 +139,13 @@ class ManufacturerController extends Controller
 
     public function searchAjax()
     {
-       
+
         $search = request() -> query('search');
 
         $manufacturers = Manufacturer::where('manufacturer', 'LIKE', "%$search%")
                             ->orWhere('id', 'LIKE', "%$search%")
                             ->get();
 
-        return response()->json($manufacturers);
+        return response()->json($manufacturers); 
     }
 }

@@ -123,13 +123,16 @@ class InvoiceController extends Controller
      */
     public function update(Request $request, Invoice $invoice)
     {
+        $request->validate([
+            'im_kodas' => 'required', 
+        ]);
         
 
         $invoice -> manufacturer_id = $request -> manufacturer_id;
 
         $invoice -> save();
 
-        return redirect()->route('invoices.index')->with('success_message', 'Pajamavimo Nr. '.$invoice -> id.' duomenys pakeisti');
+        return redirect()->route('invoices.index')->with('success_message', 'Pajamavimo Nr. '.str_pad($invoice -> id, 7, 'PAJ000', STR_PAD_LEFT).' duomenys pakeisti');
     }
 
     /**
@@ -143,17 +146,16 @@ class InvoiceController extends Controller
         $invoiceDetail_count=$invoice->invoiceInvoiceDetails->count();
 
         if ($invoiceDetail_count>0) {
-            return redirect()->route('invoices.index')->with('danger_message', 'Negalima ištrinti pajamavimo Nr. "'.$invoice -> id.'", nes jis turi prekių');
+            return redirect()->route('invoices.index')->with('danger_message', 'Negalima ištrinti pajamavimo Nr. "'.str_pad($invoice -> id, 7, 'PAJ000', STR_PAD_LEFT).'", nes jis turi prekių');
         }
 
         $invoice->delete();
 
-        return redirect()->route('invoices.index')->with('success_message', 'Pajamavimo Nr. "'.$invoice -> id.'" ištrintas');
+        return redirect()->route('invoices.index')->with('success_message', 'Pajamavimo Nr. "'.str_pad($invoice -> id, 7, 'PAJ000', STR_PAD_LEFT).'" ištrintas');
     }
 
     public function searchAjax()
     {
-
         $search = request() -> query('search');
         $invoices = Invoice::where('manufacturer_id', 'LIKE', "%$search%")->get();
 

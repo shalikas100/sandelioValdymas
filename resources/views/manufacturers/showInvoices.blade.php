@@ -1,8 +1,9 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-    <div class="row">
-        <h3>Gamintojo {{$manufacturer -> manufacturer}} atlikti pajamavimai</h3>
+    <div class="row" style="display:flex; justify-content: space-between;">
+        <h3>Gamintojo "{{$manufacturer -> manufacturer}}"" atlikti pajamavimai</h3>
+        <a class="btn btn-primary" href="{{route('manufacturers.index')}}"><i class="fa-solid fa-circle-chevron-left"></i> Grįžti į gamintojų sąrašą</a>
     </div>
     <div class="row">
     <table class="table table-hover">
@@ -23,7 +24,7 @@
             <td>
                 <form action="{{route('invoices.destroy', $invoice)}}" method="post">
                     @csrf
-                    <button class="btn btn-danger">Ištrinti pajamavimą</button>
+                    <button class="btn btn-danger"><i class="fa-solid fa-trash"></i> Ištrinti pajamavimą</button>
                 </form>
             </td>
         </tr>

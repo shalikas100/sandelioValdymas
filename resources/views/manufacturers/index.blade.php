@@ -22,8 +22,8 @@
             @endif
 
     <div class="head">
-        <h2>Gamintojai</h2>
-        <a class="btn btn-primary" href="{{route('manufacturers.create')}}">Sukurti naują gamintoją</a>
+        <h2><i class="fa-solid fa-industry"></i> Gamintojai</h2>
+        <a class="btn btn-primary" href="{{route('manufacturers.create')}}"><i class="fa-solid fa-user-plus"></i> Sukurti naują gamintoją</a>
     </div>
     <hr>
     <div class="row">
@@ -41,7 +41,7 @@
                     <th>Eil. Nr.</th>
                     <th>Gamintojas</th>
                     <th>Gamintojo ID</th>
-                    <th>Kiek kartu pajamuota</th>
+                    <th>Pajamavimų skaičius</th>
                     <th>Veiksmai</th>
                 </tr>
             </thead>
@@ -50,9 +50,9 @@
                 <tr>
                     <td>{{$loop -> iteration}}</td>
                     <td>{{$manufacturer -> manufacturer}}</td>
-                    <th>{{$manufacturer -> id}}</th>
+                    <th>{{str_pad($manufacturer -> id, 6, 'GAM00', STR_PAD_LEFT)}}</th>
                     <td><a id="manufacturerInvoices_count" class="btn btn-light" href="{{route('manufacturers.showInvoices', $manufacturer)}}">{{$manufacturer -> manufacturerInvoice -> count()}}</a></td>
-                    <td><a class="btn btn-primary" href="{{route('manufacturers.show', $manufacturer)}}">Rodyti</a></td>
+                    <td><a class="btn btn-primary" href="{{route('manufacturers.show', $manufacturer)}}"><i class="fa-solid fa-magnifying-glass"></i></a></td>
                 </tr>
             @endforeach
             </tbody>

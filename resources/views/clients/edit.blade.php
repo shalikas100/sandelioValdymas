@@ -7,10 +7,21 @@
             <h3>Kliento redagavimas</h3>
                 <form action="{{route('clients.destroy', $client)}}" method="post">
                     @csrf
-                    <button class="btn btn-danger">Ištrinti klientą</button>
+                    <button class="btn btn-danger"><i class="fa-solid fa-trash"></i> Ištrinti klientą</button>
                 </form>
-            <a class="btn btn-primary" href="{{route('clients.index')}}">Grįžti į klientų sąrašą</a>
+            <a class="btn btn-primary" href="{{route('clients.index')}}"><i class="fa-solid fa-circle-chevron-left"></i> Grįžti į klientų sąrašą</a>
         </div>
+            @if(session('success_message'))
+                <div class="alert alert-success">
+                    {{ session('success_message')}}
+                </div>
+            @endif
+
+            @if(session('danger_message'))
+                <div class="alert alert-danger">
+                    {{ session('danger_message')}}
+                </div>
+            @endif
         <div class="form">
             <form action="{{route('clients.update', $client)}}" method="post">
                 @csrf
@@ -88,7 +99,7 @@
                         </tr>
                         <tr>
                             <th>Veiksmai</th>
-                            <td><button class="btn btn-primary" type="submit">Išsaugoti pakeitimus</button>
+                            <td><button class="btn btn-primary" type="submit"><i class="fa-solid fa-floppy-disk"></i> Išsaugoti pakeitimus</button>
                             </td>
                         </tr>
                     </table>

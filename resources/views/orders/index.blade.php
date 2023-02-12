@@ -3,8 +3,8 @@
 
 <div class="container">
     <div class="head">
-        <h2>Pardavimai</h2>
-        <a class="btn btn-primary" href="{{route('orders.create')}}">Sukurti naują pardavimą</a>
+        <h2><i class="fa-regular fa-folder"></i> Pardavimai</h2>
+        <!-- <a class="btn btn-primary" href="{{route('orders.create')}}">Sukurti naują pardavimą</a> -->
     </div>
     <hr>
     <!-- Paspaudus sukurti pardavima turi atsirasti forma .form -->
@@ -58,7 +58,7 @@
                     <tr>
                         <th>Veiksmai</th>
                         <td>
-                        <button class="btn btn-primary" type="submit">Sukurti pardavimą</button>
+                        <button class="btn btn-primary" type="submit"><i class="fa-solid fa-floppy-disk"></i> Sukurti pardavimą</button>
                         </td>
                     </tr>
                 </table>
@@ -87,8 +87,8 @@
                     <td>{{$order -> orderClients -> klientas}}</td>
                     <td>{{$order -> created_at -> format('Y-m-d')}}</td>
                     <td>{{$order -> pristatymo_budas}}</td>
-                    <td><a class="btn btn-primary" href="{{route('orders.show', $order)}}">Pildyti</a></td>
-                    <td><a class="btn btn-secondary"  href="{{route('orders.edit', $order)}}">Keisti</a></td>
+                    <td><a class="btn btn-primary" href="{{route('orders.show', $order)}}"><i class="fa-solid fa-plus"></i> Pildyti</a></td>
+                    <td><a class="btn btn-secondary"  href="{{route('orders.edit', $order)}}"><i class="fa-solid fa-pencil"></i> Keisti</a></td>
                 </tr>
                 @endforeach
                 </tbody>

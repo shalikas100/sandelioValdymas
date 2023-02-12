@@ -25,8 +25,8 @@ $(document).ready(function(){
                     generateHtml += '<td>'+[i+1]+'</td>';
                     generateHtml += '<td>'+response[i].manufacturer+'</td>';
                     generateHtml += '<td>'+response[i].id+'</td>';
-                    generateHtml += '<td>'+'<a class="btn btn-light" href="/invoices/index">Turi buti skaicius</a>'+'</td>';
-                    generateHtml += '<td>'+'<a class="btn btn-primary" href="show/'+response[i].id+'">Rodyti</a>'+'</td>';
+                    generateHtml += '<td>'+'<a class="btn btn-light" href="showInvoices/'+response[i].id+'">Turi buti skaicius</a>'+'</td>';
+                    generateHtml += '<td>'+'<a class="btn btn-primary" href="show/'+response[i].id+'">'+'<i class="fa-solid fa-magnifying-glass"></i>'+'</a>'+'</td>';
                     generateHtml += '</tr>';
                 }
                 tbody.append(generateHtml);
@@ -34,7 +34,7 @@ $(document).ready(function(){
             },
             error:function(manufacturer){
 
-           
+            
             }
         })
 

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Manufacturer;
 use App\Invoice;
 use App\InvoiceDetail;
+use App\Location;
 
 class ProductController extends Controller
 {
@@ -29,12 +30,13 @@ class ProductController extends Controller
      */
     public function create($invoice)
     {
-    
+       
+        $locations = Location::all();
         $invoice = Invoice::all()->find($invoice);
 
         $manufacturers = Manufacturer::all();
     
-        return view('products.create', ['manufacturers' => $manufacturers, 'invoice' => $invoice]);
+        return view('products.create', ['manufacturers' => $manufacturers, 'invoice' => $invoice, 'locations' => $locations]);
     }
 
     /**
@@ -52,9 +54,9 @@ class ProductController extends Controller
             // 'likutis' => 'required|numeric|gte:0',
             'svoris' => 'required|numeric|between:0,3000.00',
             'vnt_dezeje' => 'required|integer|digits_between:1,10000',
-            'gamintojas' => 'required|integer',
+            'gamintojas' => 'required',
             'tipas' => 'required|min:2|max:20',
-            'vieta_sandelyje' => 'required|min:0|max:12|alpha_dash',
+            'vieta_sandelyje' => 'required|integer',
         ]);
 
         $product = new Product();
@@ -95,7 +97,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('products.edit', ['product' => $product]);
+       $locations = Location::all();
+        return view('products.edit', ['product' => $product, 'locations' => $locations]);
     }
 
     /**
@@ -116,7 +119,7 @@ class ProductController extends Controller
             'vnt_dezeje' => 'required|integer|digits_between:1,10000',
             'gamintojas' => 'required|integer',
             'tipas' => 'required|min:2|max:20',
-            'vieta_sandelyje' => 'required|min:0|max:12|alpha_dash',
+            'vieta_sandelyje' => 'required',
         ]);
 
         $product -> kodas = $request -> kodas;

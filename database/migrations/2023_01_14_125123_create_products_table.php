@@ -24,7 +24,8 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('gamintojas');
             $table->foreign('gamintojas')->references('id')->on('manufacturers');
             $table->string('tipas');
-            $table->string('vieta_sandelyje');
+            $table->unsignedBigInteger('vieta_sandelyje')->nullable();
+            $table->foreign('vieta_sandelyje')->references('id')->on('locations');
             $table->timestamps();
         });
     }

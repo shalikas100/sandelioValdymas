@@ -4,8 +4,8 @@
 <div class="container">
     <div class="row">
         <div class="col-12" style="display:flex; justify-content:space-between;">
-            <h2>Pajamavimai</h2>
-            <a class="btn btn-primary" href="{{route('invoices.create')}}">Sunurti naują pajamavimą</a>
+            <h2><i class="fa-regular fa-folder"></i> Pajamavimai</h2>
+            <!-- <a class="btn btn-primary" href="{{route('invoices.create')}}">Sunurti naują pajamavimą</a> -->
         </div>    
     </div>
     <hr>
@@ -58,7 +58,7 @@
                         <tr>
                             <th>Veiksmai</th>
                             <td>
-                            <button class="btn btn-primary" type="submit">Sukurti pajamavimą</button>
+                            <button class="btn btn-primary" type="submit"><i class="fa-solid fa-floppy-disk"></i> Sukurti pajamavimą</button>
                             </td>
                         </tr>
                     </table>
@@ -67,14 +67,14 @@
 
         </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
     <div class="col-4">
             <form id="searchAjax" url-invoices-ajax-action="{{route('invoices.searchAjax')}}">
                 @csrf
                 <input id="search_invoice" type="text" name="search" placeholder="Kliento paieška">
             </form>
     </div>
-    </div>
+    </div> -->
     @if(session('success_message'))
                         <div class="alert alert-success">
                             {{ session('success_message')}}
@@ -100,8 +100,8 @@
                     <td>{{$invoice -> invoiceManufacturer -> manufacturer}}</td>
                     <td>{{$invoice -> pirkimas_grazinimas}}</td>
                     <td>{{$invoice -> created_at -> format('Y-m-d')}}</td>
-                    <td><a class="btn btn-primary" href="{{route('invoices.show', $invoice)}}">Pildyti</a></td>
-                    <td><a class="btn btn-secondary"  href="{{route('invoices.edit', $invoice)}}">Keisti</a></td>
+                    <td><a class="btn btn-primary" href="{{route('invoices.show', $invoice)}}"><i class="fa-solid fa-plus"></i> Pildyti</a></td>
+                    <td><a class="btn btn-secondary"  href="{{route('invoices.edit', $invoice)}}"><i class="fa-solid fa-pencil"></i> Keisti</a></td>
                 </tr>
                 @endforeach
                 </tbody>

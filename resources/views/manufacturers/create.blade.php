@@ -4,8 +4,8 @@
 <div class="container">
     <div class="col-6">
         <div class="head">
-                <h3>Gamintojo kūrimas</h3>
-                <a class="btn btn-primary" href="{{route('manufacturers.index')}}">Grįžti į gamintojų sąrašą</a>
+                <h3><i class="fa-solid fa-user-plus"></i> Gamintojo kūrimas</h3>
+                <a class="btn btn-primary" href="{{route('manufacturers.index')}}"><i class="fa-solid fa-circle-chevron-left"></i> Grįžti į gamintojų sąrašą</a>
         </div>
         <div class="form">
             <form action="{{route('manufacturers.store')}}" method="post">
@@ -25,7 +25,7 @@
                         </tr>
                         <tr>
                             <th>Veiksmai</th>
-                            <td><button class="btn btn-primary" type="submit">Sukurti gamintoją</button></td>
+                            <td><button class="btn btn-primary" type="submit"><i class="fa-solid fa-floppy-disk"></i> Sukurti gamintoją</button></td>
                         </tr>
                         
                     </table>

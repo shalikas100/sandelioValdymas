@@ -29,7 +29,7 @@ $(document).ready(function(){
                     generateHtml += '<td>'+response[i].pasto_kodas+'</td>';
                     generateHtml += '<td>'+response[i].telefonas+'</td>';
                     generateHtml += '<td>'+response[i].el_pastas+'</td>';
-                    generateHtml += '<td>'+'<a class="btn btn-primary" href="show/'+response[i].id+'">Rodyti</a>'+'</td>';
+                    generateHtml += '<td>'+'<a class="btn btn-primary" href="show/'+response[i].id+'">'+'<i class="fa-solid fa-magnifying-glass"></i>'+'</a>'+'</td>';
                     generateHtml += '</tr>';
                 }
                 tbody.append(generateHtml);

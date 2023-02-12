@@ -5,8 +5,8 @@
 <div class="container">
     <div class="col-5">
         <div class="head">
-            <h3>Informacija</h3>
-            <a class="btn btn-primary" href="{{route('clients.index')}}">Grįžti į klientų sąrašą</a>
+            <h3><i class="fa-solid fa-circle-info"></i> Informacija</h3>
+            <a class="btn btn-primary" href="{{route('clients.index')}}"><i class="fa-solid fa-circle-chevron-left"></i> Grįžti į klientų sąrašą</a>
         </div>
         
         <table class="table">
@@ -36,7 +36,7 @@
             </tr>
             <tr>
                 <th>Veiksmai</th>
-                <td><a class="btn btn-primary" href="{{route('clients.edit', $client)}}">Redaguoti duomenis</a></td>   
+                <td><a class="btn btn-primary" href="{{route('clients.edit', $client)}}"><i class="fa-solid fa-pencil"></i> Redaguoti duomenis</a></td>   
             </tr>
         </table>
     </div>
