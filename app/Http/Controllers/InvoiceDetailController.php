@@ -46,9 +46,10 @@ class InvoiceDetailController extends Controller
      * @param  \App\InvoiceDetail  $invoiceDetail
      * @return \Illuminate\Http\Response
      */
-    public function show(InvoiceDetail $invoiceDetail)
+    public function show(InvoiceDetail $invoiceDetail, Invoice $invoice)
     {
-        //
+        
+        return view('invoiceDetails.show', ['invoiceDetail' => $invoiceDetail, 'invoice' => $invoice]);
     }
 
     /**

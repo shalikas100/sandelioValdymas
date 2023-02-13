@@ -68,7 +68,7 @@
     </div>
 
     <div class="row">
-        <div class="col-8">
+        <div class="col-12">
             <table class="table table-hover">
                 <thead>
                 <tr>
@@ -77,6 +77,7 @@
                     <th>Sukūrimo data</th>
                     <th>Pristatymo būdas</th>
                     <th>Veiksmai</th>
+                    <th></th>
                     <th></th>
                 </tr>
                 </thead>
@@ -89,6 +90,9 @@
                     <td>{{$order -> pristatymo_budas}}</td>
                     <td><a class="btn btn-primary" href="{{route('orders.show', $order)}}"><i class="fa-solid fa-plus"></i> Pildyti</a></td>
                     <td><a class="btn btn-secondary"  href="{{route('orders.edit', $order)}}"><i class="fa-solid fa-pencil"></i> Keisti</a></td>
+                    <td><a class="btn btn-primary" href="{{route('orderDetails.show',$order)}}"><i class="fa-solid fa-magnifying-glass"></i></a></td>
+
+                    
                 </tr>
                 @endforeach
                 </tbody>

@@ -80,7 +80,7 @@ Route::post('/orders/destroy/{order}', [OrderController::class, 'destroy'])->nam
 // OrderDetail
 Route::get('/orderDetails/index', [OrderDetailController::class, 'index'])->name('orderDetails.index')->middleware('auth');
 Route::post('/orderDetails/destroy/{orderDetail}', [OrderDetailController::class, 'destroy'])->name('orderDetails.destroy')->middleware('auth');
-
+Route::get('/orderDetails/{order}', [OrderDetailController::class, 'show'])->name('orderDetails.show')->middleware('auth');
 
 // Invoice
 Route::get('/invoices/index', [InvoiceController::class, 'index'])->name('invoices.index')->middleware('auth');
@@ -98,6 +98,7 @@ Route::post('/invoices/destroy/{invoice}', [InvoiceController::class, 'destroy']
 // InvoiceDetail
 Route::get('/invoiceDetails/index', [InvoiceDetailController::class, 'index'])->name('invoiceDetails.index')->middleware('auth');
 Route::post('/invoiceDetails/destroy/{invoiceDetail}', [InvoiceDetailController::class, 'destroy'])->name('invoiceDetails.destroy')->middleware('auth');
+Route::get('/invoiceDetails/{invoice}', [InvoiceDetailController::class, 'show'])->name('invoiceDetails.show')->middleware('auth');
 
 // Location
 Route::get('/locations/index', [LocationController::class, 'index'])->name('locations.index')->middleware('auth');

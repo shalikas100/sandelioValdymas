@@ -51,7 +51,6 @@ class ProductController extends Controller
             'kodas' => 'required|min:2|max:20|alpha_dash',
             'barkodas' => 'required|integer|digits_between:3,20',
             'pavadinimas' => 'required|min:2|max:64',
-            // 'likutis' => 'required|numeric|gte:0',
             'svoris' => 'required|numeric|between:0,3000.00',
             'vnt_dezeje' => 'required|integer|digits_between:1,10000',
             'gamintojas' => 'required',

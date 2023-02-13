@@ -3,7 +3,7 @@
 
 <div class="container">
     <div class="col-8">
-    <div class="row">
+    <div class="row" style="display:flex; justify-content: space-between;">
             <h3>Pardavimo redagavimas</h3>
                 <form action="{{route('orders.destroy', $order)}}" method="post">
                     @csrf

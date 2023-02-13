@@ -51,9 +51,10 @@ class OrderDetailController extends Controller
      * @param  \App\OrderDetail  $orderDetail
      * @return \Illuminate\Http\Response
      */
-    public function show(OrderDetail $orderDetail)
+    public function show(OrderDetail $orderDetail, Order $order)
     {
-        //
+
+        return view('orderDetails.show', ['orderDetail' => $orderDetail, 'order' => $order]);
     }
 
     /**

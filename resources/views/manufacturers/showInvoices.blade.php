@@ -20,7 +20,7 @@
         <tr>
             <td>{{str_pad($invoice -> id, 7, 'PAJ000', STR_PAD_LEFT)}}</td>
             <td>{{$invoice -> created_at}}</td>
-            <td><a class="btn btn-light" href="{{route('invoices.show', $invoice)}}">{{$invoice -> invoiceInvoiceDetails -> count()}}</a></td>
+            <td><a class="btn btn-light" href="{{route('invoiceDetails.show',$invoice)}}">{{$invoice -> invoiceInvoiceDetails -> count()}}</a></td>
             <td>
                 <form action="{{route('invoices.destroy', $invoice)}}" method="post">
                     @csrf

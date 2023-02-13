@@ -2,8 +2,9 @@
 @section('content')
 
 <div class="container">
-    <div class="row">
+    <div class="row" style="display:flex; justify-content: space-between;">
         <h3><i class="fa-solid fa-plus"></i> <i class="fa-solid fa-thumbtack"></i> Vietos kūrimas</h3>
+        <a class="btn btn-primary" href="{{route('locations.index')}}"><i class="fa-solid fa-circle-chevron-left"></i> Grįžti į sandėlio vietų sąrašą</a>
     </div>
     <div class="row">
         <form method="post" action="{{route('locations.store')}}">
